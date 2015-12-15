@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="游记," />
+  <meta name="keywords" content="Android," />
 
 
 
@@ -51,23 +51,19 @@
 
 
 
-<meta name="description" content="不是前言的前言去过很多城市，有呆了四年的无锡，有实习两个月的上海，有匆匆逗留的杭州，常州，武汉，长沙，有毕业开始工作的南京。但唯独南京给我一种莫名的亲切感。喜欢南京满城的梧桐树，紫金山的郁郁葱葱，新街口的都市繁华，喜欢珠江路充满浓浓爱意的糖果车站，喜欢那种诉说千年兴亡的历史感。也许真会因为一个人爱上一座城。
-难得的南京蓝周六，没有预报的小雨。天公作美，难得的大晴天，天蓝得如同海一般。呼吸着空气都让">
+<meta name="description" content="Activity的四种启动模式这四种模式分别是standard、singleTop、singleTask、singleInstance.
+如何给Activity指定启动模式在AndroidManifest中给Activity指定通过在Java代码中设置Intent的标志位给Activity指定//TODO">
 <meta property="og:type" content="article">
-<meta property="og:title" content="金陵游记">
-<meta property="og:url" content="http://yoursite.com/2015/12/13/金陵游记/index.html">
+<meta property="og:title" content="Android开发艺术探索学习笔记——Activity的启动模式">
+<meta property="og:url" content="http://yoursite.com/2015/12/14/Android开发艺术探索笔记——Activity的启动模式/index.html">
 <meta property="og:site_name" content="JohnTsai">
-<meta property="og:description" content="不是前言的前言去过很多城市，有呆了四年的无锡，有实习两个月的上海，有匆匆逗留的杭州，常州，武汉，长沙，有毕业开始工作的南京。但唯独南京给我一种莫名的亲切感。喜欢南京满城的梧桐树，紫金山的郁郁葱葱，新街口的都市繁华，喜欢珠江路充满浓浓爱意的糖果车站，喜欢那种诉说千年兴亡的历史感。也许真会因为一个人爱上一座城。
-难得的南京蓝周六，没有预报的小雨。天公作美，难得的大晴天，天蓝得如同海一般。呼吸着空气都让">
-<meta property="og:image" content="http://ww2.sinaimg.cn/large/8942f980gw1eyybqhvobqj20qo0zkgpa.jpg">
-<meta property="og:image" content="http://ww4.sinaimg.cn/large/8942f980gw1eyycgsix1pj20zk0qo422.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8942f980gw1eyyc33cqu6j20qo0zkjwt.jpg">
-<meta property="og:image" content="http://ww3.sinaimg.cn/large/8942f980gw1eyyc3c9q98j20qo0zk7bx.jpg">
-<meta property="og:updated_time" content="2015-12-13T14:26:11.000Z">
+<meta property="og:description" content="Activity的四种启动模式这四种模式分别是standard、singleTop、singleTask、singleInstance.
+如何给Activity指定启动模式在AndroidManifest中给Activity指定通过在Java代码中设置Intent的标志位给Activity指定//TODO">
+<meta property="og:updated_time" content="2015-12-15T05:54:49.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="金陵游记">
-<meta name="twitter:description" content="不是前言的前言去过很多城市，有呆了四年的无锡，有实习两个月的上海，有匆匆逗留的杭州，常州，武汉，长沙，有毕业开始工作的南京。但唯独南京给我一种莫名的亲切感。喜欢南京满城的梧桐树，紫金山的郁郁葱葱，新街口的都市繁华，喜欢珠江路充满浓浓爱意的糖果车站，喜欢那种诉说千年兴亡的历史感。也许真会因为一个人爱上一座城。
-难得的南京蓝周六，没有预报的小雨。天公作美，难得的大晴天，天蓝得如同海一般。呼吸着空气都让">
+<meta name="twitter:title" content="Android开发艺术探索学习笔记——Activity的启动模式">
+<meta name="twitter:description" content="Activity的四种启动模式这四种模式分别是standard、singleTop、singleTask、singleInstance.
+如何给Activity指定启动模式在AndroidManifest中给Activity指定通过在Java代码中设置Intent的标志位给Activity指定//TODO">
 
 
 
@@ -79,7 +75,7 @@
   };
 </script>
 
-  <title> 金陵游记 | JohnTsai </title>
+  <title> Android开发艺术探索学习笔记——Activity的启动模式 | JohnTsai </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -219,7 +215,7 @@
             
             
               
-                金陵游记
+                Android开发艺术探索学习笔记——Activity的启动模式
               
             
           </h1>
@@ -228,8 +224,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-12-13T20:37:03+08:00" content="2015-12-13">
-              2015-12-13
+            <time itemprop="dateCreated" datetime="2015-12-14T19:58:18+08:00" content="2015-12-14">
+              2015-12-14
             </time>
           </span>
 
@@ -239,8 +235,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/13/金陵游记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/13/金陵游记/" itemprop="commentsCount"></span>
+                <a href="/2015/12/14/Android开发艺术探索笔记——Activity的启动模式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/14/Android开发艺术探索笔记——Activity的启动模式/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -259,22 +255,8 @@
       
 
       
-        <span itemprop="articleBody"><h1 id="u4E0D_u662F_u524D_u8A00_u7684_u524D_u8A00"><a href="#u4E0D_u662F_u524D_u8A00_u7684_u524D_u8A00" class="headerlink" title="不是前言的前言"></a>不是前言的前言</h1><p>去过很多城市，有呆了四年的无锡，有实习两个月的上海，有匆匆逗留的杭州，常州，武汉，长沙，有毕业开始工作的南京。但唯独南京给我一种莫名的亲切感。喜欢南京满城的梧桐树，紫金山的郁郁葱葱，新街口的都市繁华，喜欢珠江路充满浓浓爱意的糖果车站，喜欢那种诉说千年兴亡的历史感。也许真会因为一个人爱上一座城。</p>
-<h1 id="u96BE_u5F97_u7684_u5357_u4EAC_u84DD"><a href="#u96BE_u5F97_u7684_u5357_u4EAC_u84DD" class="headerlink" title="难得的南京蓝"></a>难得的南京蓝</h1><p>周六，没有预报的小雨。天公作美，难得的大晴天，天蓝得如同海一般。呼吸着空气都让人开心。</p>
-<p><img src="http://ww2.sinaimg.cn/large/8942f980gw1eyybqhvobqj20qo0zkgpa.jpg" alt=""></p>
-<a id="more"></a> 
-<p><img src="http://ww4.sinaimg.cn/large/8942f980gw1eyycgsix1pj20zk0qo422.jpg" alt=""></p>
-<h1 id="u76EE_u9001_u771F_u662F_u8F6E_u56DE_u554A"><a href="#u76EE_u9001_u771F_u662F_u8F6E_u56DE_u554A" class="headerlink" title="目送真是轮回啊"></a>目送真是轮回啊</h1><p>带着爸妈爬紫金山，到中山陵和明孝陵游玩。他们辛苦了这么多年，难得抽出时间放松自己，做儿子的心里真是五味杂陈。教爸妈买票坐地铁，小时候他们教我坐公交。给爸妈讲解中山陵和明孝陵的种种历史典故，小时候他们教我各种唐诗数学。</p>
-<p>晚上吃饭时，一抬头，看见他们脸上的皱纹，头上开始多了起来的白发。心头一震：“爸妈真的老了”。时间无言，只有我们这些匆匆过客才觉得它快。愿父母健健康康，快快乐乐。</p>
-<blockquote>
-<p>我慢慢地、慢慢地了解到，所谓父女母子一场，只不过意味着，你和他的缘分就是今生今世不断地在目送他的背影渐行渐远。你站立在小路的这一端，看着他逐渐消失在小路转弯的地方，而且，他用背影默默告诉你：不必追。 —《目送》</p>
-</blockquote>
-<h1 id="u662F_u975E_u6210_u8D25_u8F6C_u5934_u7A7A"><a href="#u662F_u975E_u6210_u8D25_u8F6C_u5934_u7A7A" class="headerlink" title="是非成败转头空"></a>是非成败转头空</h1><p>南京是个悲伤的城市，虽有着虎踞龙盘的帝王之气，而以她为都城的王朝个个短命。秦淮河边的商贾繁华，让人想起“商女不知亡国恨，隔江犹唱后庭花”的亡国之音呐。</p>
-<p><img src="http://ww1.sinaimg.cn/large/8942f980gw1eyyc33cqu6j20qo0zkjwt.jpg" alt=""></p>
-<p>南京又是一个有故事，有爱的城市。大街小巷，钟山长江纷纷在诉说那千年王朝兴替，爱恨情仇的故事。宋美龄喜欢梧桐树，蒋便为她在南京的街道边种满了梧桐。地铁1号线的珠江站，小朋友有没有因为收到叔叔阿姨的糖果而不哭了呢？</p>
-<p><img src="http://ww3.sinaimg.cn/large/8942f980gw1eyyc3c9q98j20qo0zk7bx.jpg" alt=""></p>
-<h1 id="u5C0F_u5C0F_u7684_u603B_u7ED3"><a href="#u5C0F_u5C0F_u7684_u603B_u7ED3" class="headerlink" title="小小的总结"></a>小小的总结</h1><p>一座城市会给人的亲切感和归属感，一个人也会给人一种熟悉感。呆在这样的城市很开心，能和我爱的人在一起也让人无比幸福。</p>
-<p>晚安，南京。晚安，爸妈。晚安，你们。晚安，你。</p>
+        <span itemprop="articleBody"><h1 id="Activity_u7684_u56DB_u79CD_u542F_u52A8_u6A21_u5F0F"><a href="#Activity_u7684_u56DB_u79CD_u542F_u52A8_u6A21_u5F0F" class="headerlink" title="Activity的四种启动模式"></a>Activity的四种启动模式</h1><p>这四种模式分别是standard、singleTop、singleTask、singleInstance.</p>
+<h1 id="u5982_u4F55_u7ED9Activity_u6307_u5B9A_u542F_u52A8_u6A21_u5F0F"><a href="#u5982_u4F55_u7ED9Activity_u6307_u5B9A_u542F_u52A8_u6A21_u5F0F" class="headerlink" title="如何给Activity指定启动模式"></a>如何给Activity指定启动模式</h1><h2 id="u5728AndroidManifest_u4E2D_u7ED9Activity_u6307_u5B9A"><a href="#u5728AndroidManifest_u4E2D_u7ED9Activity_u6307_u5B9A" class="headerlink" title="在AndroidManifest中给Activity指定"></a>在AndroidManifest中给Activity指定</h2><h2 id="u901A_u8FC7_u5728Java_u4EE3_u7801_u4E2D_u8BBE_u7F6EIntent_u7684_u6807_u5FD7_u4F4D_u7ED9Activity_u6307_u5B9A"><a href="#u901A_u8FC7_u5728Java_u4EE3_u7801_u4E2D_u8BBE_u7F6EIntent_u7684_u6807_u5FD7_u4F4D_u7ED9Activity_u6307_u5B9A" class="headerlink" title="通过在Java代码中设置Intent的标志位给Activity指定"></a>通过在Java代码中设置Intent的标志位给Activity指定</h2><p><code>//TODO</code></p>
 </span>
       
     </div>
@@ -283,7 +265,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/游记/" rel="tag">#游记</a>
+            <a href="/tags/Android/" rel="tag">#Android</a>
           
         </div>
       
@@ -292,12 +274,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2015/12/13/金陵游记/" rel="next" title="金陵游记">
+                <i class="fa fa-chevron-left"></i> 金陵游记
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/12/14/Android开发艺术探索笔记——Activity的启动模式/" rel="prev" title="Android开发艺术探索学习笔记——Activity的启动模式">
-                Android开发艺术探索学习笔记——Activity的启动模式 <i class="fa fa-chevron-right"></i>
+              <a href="/2015/12/15/为Genymotion设置Charles代理/" rel="prev" title="为Genymotion设置Charles代理">
+                为Genymotion设置Charles代理 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -348,8 +334,8 @@
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/12/13/金陵游记/"
-           data-title="金陵游记" data-url="http://yoursite.com/2015/12/13/金陵游记/">
+      <div class="ds-thread" data-thread-key="2015/12/14/Android开发艺术探索笔记——Activity的启动模式/"
+           data-title="Android开发艺术探索学习笔记——Activity的启动模式" data-url="http://yoursite.com/2015/12/14/Android开发艺术探索笔记——Activity的启动模式/">
       </div>
     
   </div>
@@ -473,7 +459,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#u4E0D_u662F_u524D_u8A00_u7684_u524D_u8A00"><span class="nav-number">1.</span> <span class="nav-text">不是前言的前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u96BE_u5F97_u7684_u5357_u4EAC_u84DD"><span class="nav-number">2.</span> <span class="nav-text">难得的南京蓝</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u76EE_u9001_u771F_u662F_u8F6E_u56DE_u554A"><span class="nav-number">3.</span> <span class="nav-text">目送真是轮回啊</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u662F_u975E_u6210_u8D25_u8F6C_u5934_u7A7A"><span class="nav-number">4.</span> <span class="nav-text">是非成败转头空</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u5C0F_u5C0F_u7684_u603B_u7ED3"><span class="nav-number">5.</span> <span class="nav-text">小小的总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Activity_u7684_u56DB_u79CD_u542F_u52A8_u6A21_u5F0F"><span class="nav-number">1.</span> <span class="nav-text">Activity的四种启动模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u5982_u4F55_u7ED9Activity_u6307_u5B9A_u542F_u52A8_u6A21_u5F0F"><span class="nav-number">2.</span> <span class="nav-text">如何给Activity指定启动模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#u5728AndroidManifest_u4E2D_u7ED9Activity_u6307_u5B9A"><span class="nav-number">2.1.</span> <span class="nav-text">在AndroidManifest中给Activity指定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u901A_u8FC7_u5728Java_u4EE3_u7801_u4E2D_u8BBE_u7F6EIntent_u7684_u6807_u5FD7_u4F4D_u7ED9Activity_u6307_u5B9A"><span class="nav-number">2.2.</span> <span class="nav-text">通过在Java代码中设置Intent的标志位给Activity指定</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
