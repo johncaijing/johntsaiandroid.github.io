@@ -65,7 +65,7 @@ View是Android中所有控件的基类。View是界面层的控件的一种抽�
 
 View的位置参数如下图所示，View">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android开发艺术探索——View的事件体系">
+<meta property="og:title" content="Android开发艺术探索学习笔记——View的事件体系(一)">
 <meta property="og:url" content="http://yoursite.com/2015/12/21/Android开发艺术探索学习笔记——View的事件体系/index.html">
 <meta property="og:site_name" content="JohnTsai">
 <meta property="og:description" content="View基础知识主要内容有：
@@ -81,9 +81,9 @@ View是Android中所有控件的基类。View是界面层的控件的一种抽�
 View的位置参数如下图所示，View">
 <meta property="og:image" content="http://i.stack.imgur.com/KSCNf.png">
 <meta property="og:image" content="http://images2015.cnblogs.com/blog/663543/201510/663543-20151021155833989-633374227.png">
-<meta property="og:updated_time" content="2015-12-22T08:45:18.000Z">
+<meta property="og:updated_time" content="2015-12-22T12:02:34.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android开发艺术探索——View的事件体系">
+<meta name="twitter:title" content="Android开发艺术探索学习笔记——View的事件体系(一)">
 <meta name="twitter:description" content="View基础知识主要内容有：
 
 View的位置参数
@@ -106,7 +106,7 @@ View的位置参数如下图所示，View">
   };
 </script>
 
-  <title> Android开发艺术探索——View的事件体系 | JohnTsai </title>
+  <title> Android开发艺术探索学习笔记——View的事件体系(一) | JohnTsai </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -246,7 +246,7 @@ View的位置参数如下图所示，View">
             
             
               
-                Android开发艺术探索——View的事件体系
+                Android开发艺术探索学习笔记——View的事件体系(一)
               
             
           </h1>
@@ -318,7 +318,11 @@ View的位置参数如下图所示，View">
 <p>Android3.0开始，View新增了几个参数:x,y,translationX,translationY.</p>
 <blockquote>
 <p>x,y是View左上角的坐标，translationX和translationY是View左上角相对于父容器的<strong>偏移量</strong>(默认值为0)。这几个参数都是相对于父容器的坐标。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#62;```y=top+translationY</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>这几个参数的转化关系:</p>
+<blockquote>
+<p>x=left+translationX</p>
+<p>y=top+translationY</p>
 </blockquote>
 <p>View在平移过程中，top和left表示View原始左上角的位置信息，值不会改变，发生改变的是x,y,translationX和translationY这四个参数.</p>
 <h3 id="MotionEvent_u548CTouchSlop"><a href="#MotionEvent_u548CTouchSlop" class="headerlink" title="MotionEvent和TouchSlop"></a>MotionEvent和TouchSlop</h3><h4 id="MotionEvent"><a href="#MotionEvent" class="headerlink" title="MotionEvent"></a>MotionEvent</h4><p>在手指触摸屏幕后产生一系列事件中，典型的有以下几种</p>
@@ -327,9 +331,30 @@ View的位置参数如下图所示，View">
 <li>ACTION_MOVE(在屏幕上移动)</li>
 <li>ACTION_UP（从屏幕上松开）</li>
 </ul>
-<p>通过MotionEvent对象可以得到点击事件的坐标。<br>系统提供了两组方法：<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;getX/getY&#36820;&#22238;&#30456;&#23545;&#20110;&#24403;&#21069;View&#24038;&#19978;&#35282;&#30340;xy&#22352;&#26631;&#10;&#10;getRawX/getRawY&#36820;&#22238;&#30340;&#26159;&#30456;&#23545;&#20110;&#25163;&#26426;&#23631;&#24149;&#24038;&#19978;&#35282;&#30340;xy&#22352;&#26631;&#10;&#10;&#10;&#10;#### TouchSlop&#10;&#10;TouchSlop&#26159;Android&#31995;&#32479;&#33021;&#35782;&#21035;&#20986;&#30340;&#28369;&#21160;&#30340;&#26368;&#23567;&#36317;&#31163;&#12290;&#24120;&#37327;&#65292;&#20855;&#20307;&#20540;&#21644;&#35774;&#22791;&#26377;&#20851;&#12290;&#10;&#10;&#33719;&#21462;&#26041;&#24335;&#65306;```ViewConfiguration.get(getContext()).getScaledTouchSlop()</span><br></pre></td></tr></table></figure></p>
+<p>通过MotionEvent对象可以得到点击事件的坐标。<br>系统提供了两组方法：</p>
+<blockquote>
+<p>getX/getY和getRawX/getRawY<br>getX/getY返回相对于当前View左上角的xy坐标<br>getRawX/getRawY返回的是相对于手机屏幕左上角的xy坐标</p>
+</blockquote>
+<h4 id="TouchSlop"><a href="#TouchSlop" class="headerlink" title="TouchSlop"></a>TouchSlop</h4><p>TouchSlop是Android系统能识别出的滑动的最小距离。常量，具体值和设备有关。</p>
+<p>获取方式：<code>ViewConfiguration.get(getContext()).getScaledTouchSlop()</code></p>
 <p>在Android源码中能找到TouchSlop这个常量的定义:<a href="https://github.com/android/platform_frameworks_base/blob/master/core%2Fres%2Fres%2Fvalues%2Fconfig.xml" target="_blank" rel="external">https://github.com/android/platform_frameworks_base/blob/master/core%2Fres%2Fres%2Fvalues%2Fconfig.xml</a></p>
-<h3 id="VelocityTracker_u3001GestureDetector_u548CScroller"><a href="#VelocityTracker_u3001GestureDetector_u548CScroller" class="headerlink" title="VelocityTracker、GestureDetector和Scroller"></a>VelocityTracker、GestureDetector和Scroller</h3><h4 id="VelocityTracker"><a href="#VelocityTracker" class="headerlink" title="VelocityTracker"></a>VelocityTracker</h4><h4 id="GestureDetector"><a href="#GestureDetector" class="headerlink" title="GestureDetector"></a>GestureDetector</h4><h4 id="Scroller"><a href="#Scroller" class="headerlink" title="Scroller"></a>Scroller</h4></span>
+<h3 id="VelocityTracker_u3001GestureDetector_u548CScroller"><a href="#VelocityTracker_u3001GestureDetector_u548CScroller" class="headerlink" title="VelocityTracker、GestureDetector和Scroller"></a>VelocityTracker、GestureDetector和Scroller</h3><h4 id="VelocityTracker"><a href="#VelocityTracker" class="headerlink" title="VelocityTracker"></a>VelocityTracker</h4><p>速度追踪，用于追踪手指在滑动过程的速度.</p>
+<blockquote>
+<p>Android API document:<a href="http://developer.android.com/reference/android/view/VelocityTracker.html" target="_blank" rel="external">http://developer.android.com/reference/android/view/VelocityTracker.html</a></p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//追踪速度前</span></span><br><span class="line"><span class="comment">//先通过obtain()方法获取VelocityTraker实例</span></span><br><span class="line">VelocityTracker velocityTracker = VelocityTracker.obtain();</span><br><span class="line"><span class="comment">//将接收到的motion event添加到VelocityTraker实例中</span></span><br><span class="line">velocityTracker.addMovement(event);</span><br><span class="line"></span><br><span class="line"><span class="comment">//计算速度</span></span><br><span class="line">velocityTracker.computeCurrentVelocity(<span class="number">1000</span>);</span><br><span class="line"><span class="comment">//获取速度</span></span><br><span class="line"><span class="keyword">int</span> vx = velocityTracker.getXVelocity();</span><br><span class="line"><span class="keyword">int</span> vy = velocityTracker.getYVelocity();</span><br><span class="line"></span><br><span class="line"><span class="comment">//当不需要使用VelocityTraker实例时</span></span><br><span class="line"><span class="comment">//使用clear()方法重置，recycler()方法回收内存</span></span><br><span class="line">velocityTracker.clear();</span><br><span class="line">velocityTracker.recycler();</span><br></pre></td></tr></table></figure>
+<h4 id="GestureDetector"><a href="#GestureDetector" class="headerlink" title="GestureDetector"></a>GestureDetector</h4><p>手势检测,用于辅助检测用户的<strong>单击，滑动，长按，双击等</strong>行为.</p>
+<blockquote>
+<p>Android API document:<a href="http://developer.android.com/reference/android/view/GestureDetector.html" target="_blank" rel="external">http://developer.android.com/reference/android/view/GestureDetector.html</a></p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建GestureDetector对象，并实现OnGestureListener接口</span></span><br><span class="line">GestureDetector mGestureDetector = <span class="keyword">new</span> GestureDetector(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//接管View的onTouchEvent()方法,并覆写该方法</span></span><br><span class="line"><span class="keyword">return</span> mGestureDetector.onTouchEvent(event); </span><br><span class="line">mGestureDetector.setIsLongpressEnabled(<span class="keyword">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//有选择的实现OnGestureListener和OnDoubleTapListener接口中的方法了</span></span><br></pre></td></tr></table></figure>
+<h4 id="Scroller"><a href="#Scroller" class="headerlink" title="Scroller"></a>Scroller</h4><p>弹性滑动对象，用于实现View的弹性滑动</p>
+<p>View实现滑动的两种方式及其对比：</p>
+<ul>
+<li>View的ScrollTo/Scroll(滑动过程瞬间完成，无过渡效果，易造成滑动用户体验不好)</li>
+<li>Scroller和View的computeScroll方法配合完成View的弹性滑动(非瞬间完成的，有过渡效果)</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Scroller scroller = <span class="keyword">new</span> Scroller(context);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span><br><span class="line"> *缓慢滑动到指定位置</span><br><span class="line"> */</span></span><br><span class="line"> <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">smoothScrollTo</span><span class="params">(<span class="keyword">int</span> destX,<span class="keyword">int</span> destY)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> scrollX = getScrollX();</span><br><span class="line">    <span class="keyword">int</span> delta = desX - desY;</span><br><span class="line">    <span class="comment">//1000ms内滑动到destX</span></span><br><span class="line">    scroller.startScroll(scrollX,<span class="number">0</span>,delta,<span class="number">0</span>,<span class="number">1000</span>);</span><br><span class="line">    invalidate();</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> <span class="annotation">@Override</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">computeScroll</span><span class="params">()</span></span>&#123;</span><br><span class="line"> <span class="keyword">if</span>(scroller.computeScrollOffset())&#123;</span><br><span class="line">    scrollTo(scroller.getCurrX(),scroller.getCurrY());</span><br><span class="line">    postInvaildate();</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></span>
       
     </div>
 
@@ -403,7 +428,7 @@ View的位置参数如下图所示，View">
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2015/12/21/Android开发艺术探索学习笔记——View的事件体系/"
-           data-title="Android开发艺术探索——View的事件体系" data-url="http://yoursite.com/2015/12/21/Android开发艺术探索学习笔记——View的事件体系/">
+           data-title="Android开发艺术探索学习笔记——View的事件体系(一)" data-url="http://yoursite.com/2015/12/21/Android开发艺术探索学习笔记——View的事件体系/">
       </div>
     
   </div>
@@ -527,7 +552,7 @@ View的位置参数如下图所示，View">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#View_u57FA_u7840_u77E5_u8BC6"><span class="nav-number">1.</span> <span class="nav-text">View基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#u4EC0_u4E48_u662FView"><span class="nav-number">1.1.</span> <span class="nav-text">什么是View</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#View_u7684_u4F4D_u7F6E_u53C2_u6570"><span class="nav-number">1.2.</span> <span class="nav-text">View的位置参数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MotionEvent_u548CTouchSlop"><span class="nav-number">2.</span> <span class="nav-text">MotionEvent和TouchSlop</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MotionEvent"><span class="nav-number">2.1.</span> <span class="nav-text">MotionEvent</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VelocityTracker_u3001GestureDetector_u548CScroller"><span class="nav-number">3.</span> <span class="nav-text">VelocityTracker、GestureDetector和Scroller</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#VelocityTracker"><span class="nav-number">3.1.</span> <span class="nav-text">VelocityTracker</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GestureDetector"><span class="nav-number">3.2.</span> <span class="nav-text">GestureDetector</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Scroller"><span class="nav-number">3.3.</span> <span class="nav-text">Scroller</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#View_u57FA_u7840_u77E5_u8BC6"><span class="nav-number">1.</span> <span class="nav-text">View基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#u4EC0_u4E48_u662FView"><span class="nav-number">1.1.</span> <span class="nav-text">什么是View</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#View_u7684_u4F4D_u7F6E_u53C2_u6570"><span class="nav-number">1.2.</span> <span class="nav-text">View的位置参数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MotionEvent_u548CTouchSlop"><span class="nav-number">2.</span> <span class="nav-text">MotionEvent和TouchSlop</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MotionEvent"><span class="nav-number">2.1.</span> <span class="nav-text">MotionEvent</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TouchSlop"><span class="nav-number">2.2.</span> <span class="nav-text">TouchSlop</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VelocityTracker_u3001GestureDetector_u548CScroller"><span class="nav-number">3.</span> <span class="nav-text">VelocityTracker、GestureDetector和Scroller</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#VelocityTracker"><span class="nav-number">3.1.</span> <span class="nav-text">VelocityTracker</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GestureDetector"><span class="nav-number">3.2.</span> <span class="nav-text">GestureDetector</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Scroller"><span class="nav-number">3.3.</span> <span class="nav-text">Scroller</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
