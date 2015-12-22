@@ -118,7 +118,7 @@
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
-  <p class="site-subtitle"></p>
+  <p class="site-subtitle">万物之中，希望最美，最美之物，永不凋零.</p>
 </div>
 
 <div class="site-nav-toggle">
@@ -295,7 +295,20 @@
 </ul>
 </blockquote>
 <p>Android3.0开始，View新增了几个参数:x,y,translationX,translationY.</p>
-
+<blockquote>
+<p>x,y是View左上角的坐标，translationX和translationY是View左上角相对于父容器的<strong>偏移量</strong>(默认值为0)。这几个参数都是相对于父容器的坐标。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#62;```y=top+translationY</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>View在平移过程中，top和left表示View原始左上角的位置信息，值不会改变，发生改变的是x,y,translationX和translationY这四个参数.</p>
+<h3 id="MotionEvent_u548CTouchSlop"><a href="#MotionEvent_u548CTouchSlop" class="headerlink" title="MotionEvent和TouchSlop"></a>MotionEvent和TouchSlop</h3><h4 id="MotionEvent"><a href="#MotionEvent" class="headerlink" title="<a href=" http:="" developer.android.com="" reference="" android="" view="" motionevent.html"="">MotionEvent</a>"><a href="http://developer.android.com/reference/android/view/MotionEvent.html" target="_blank" rel="external">MotionEvent</a></h4><p>在手指触摸屏幕后产生一系列事件中，典型的有以下几种</p>
+<ul>
+<li>ACTION_DOWN(刚接触屏幕)</li>
+<li>ACTION_MOVE(在屏幕上移动)</li>
+<li>ACTION_UP（从屏幕上松开）</li>
+</ul>
+<p>通过MotionEvent对象可以得到点击事件的坐标。<br>系统提供了两组方法：<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;getX/getY&#36820;&#22238;&#30456;&#23545;&#20110;&#24403;&#21069;View&#24038;&#19978;&#35282;&#30340;xy&#22352;&#26631;&#10;&#10;getRawX/getRawY&#36820;&#22238;&#30340;&#26159;&#30456;&#23545;&#20110;&#25163;&#26426;&#23631;&#24149;&#24038;&#19978;&#35282;&#30340;xy&#22352;&#26631;&#10;&#10;#### [TouchSlop](http://developer.android.com/training/gestures/viewgroup.html#vc)&#10;&#10;TouchSlop&#26159;Android&#31995;&#32479;&#33021;&#35782;&#21035;&#20986;&#30340;&#28369;&#21160;&#30340;&#26368;&#23567;&#36317;&#31163;&#12290;&#24120;&#37327;&#65292;&#20855;&#20307;&#20540;&#21644;&#35774;&#22791;&#26377;&#20851;&#12290;&#10;&#10;&#33719;&#21462;&#26041;&#24335;&#65306;```ViewConfiguration.get(getContext()).getScaledTouchSlop()</span><br></pre></td></tr></table></figure></p>
+<p>在Android源码中能找到TouchSlop这个常量的定义:<a href="https://github.com/android/platform_frameworks_base/blob/master/core%2Fres%2Fres%2Fvalues%2Fconfig.xml" target="_blank" rel="external">https://github.com/android/platform_frameworks_base/blob/master/core%2Fres%2Fres%2Fvalues%2Fconfig.xml</a></p>
+<h3 id="VelocityTracker_u3001GestureDetector_u548CScroller"><a href="#VelocityTracker_u3001GestureDetector_u548CScroller" class="headerlink" title="VelocityTracker、GestureDetector和Scroller"></a>VelocityTracker、GestureDetector和Scroller</h3><h4 id="VelocityTracker"><a href="#VelocityTracker" class="headerlink" title="<a href=" http:="" developer.android.com="" reference="" android="" view="" velocitytracker.html"="">VelocityTracker</a>"><a href="http://developer.android.com/reference/android/view/VelocityTracker.html" target="_blank" rel="external">VelocityTracker</a></h4><h4 id="GestureDetector"><a href="#GestureDetector" class="headerlink" title="GestureDetector"></a>GestureDetector</h4><h4 id="Scroller"><a href="#Scroller" class="headerlink" title="Scroller"></a>Scroller</h4>
             
           </span>
         
