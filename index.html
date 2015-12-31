@@ -231,6 +231,93 @@
             
               
                 
+                <a class="post-title-link" href="/2015/12/31/effective-java-generic-type/" itemprop="url">
+                  effective-java-generic-type
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-12-31T15:56:54+08:00" content="2015-12-31">
+              2015-12-31
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/31/effective-java-generic-type/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/31/effective-java-generic-type/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/12/29/the-principle-of-view/" itemprop="url">
                   View的工作原理
                 </a>
@@ -303,6 +390,238 @@
 <p>在Android DDMS中可以查看应用的布局情况，如上图所示，DecorView作为顶级VIe，一般情况下内部会包含一个LinearLayout。上面是标题栏，下面是内容栏。在我们activity中设置XML文件就是写在setContentView中。</p>
 <h3 id="MeasureSpec"><a href="#MeasureSpec" class="headerlink" title="MeasureSpec"></a>MeasureSpec</h3><p>32位int值，高2位表示SpecMode(测量模式)，低30位代表SpecSize(某种测量模式下得规格大小)。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MeasureSpec</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MODE_SHIFT = <span class="number">30</span>;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MODE_MASK  = <span class="number">0x3</span> &lt;&lt; MODE_SHIFT;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span><br><span class="line">         * Measure specification mode: The parent has not imposed any constraint</span><br><span class="line">         * on the child. It can be whatever size it wants.</span><br><span class="line">         */</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> UNSPECIFIED = <span class="number">0</span> &lt;&lt; MODE_SHIFT;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span><br><span class="line">         * Measure specification mode: The parent has determined an exact size</span><br><span class="line">         * for the child. The child is going to be given those bounds regardless</span><br><span class="line">         * of how big it wants to be.</span><br><span class="line">         */</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> EXACTLY     = <span class="number">1</span> &lt;&lt; MODE_SHIFT;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span><br><span class="line">         * Measure specification mode: The child can be as large as it wants up</span><br><span class="line">         * to the specified size.</span><br><span class="line">         */</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> AT_MOST     = <span class="number">2</span> &lt;&lt; MODE_SHIFT;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">makeMeasureSpec</span><span class="params">(<span class="keyword">int</span> size, <span class="keyword">int</span> mode)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (sUseBrokenMakeMeasureSpec) &#123;</span><br><span class="line">                <span class="keyword">return</span> size + mode;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> (size &amp; ~MODE_MASK) | (mode &amp; MODE_MASK);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">         <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">makeSafeMeasureSpec</span><span class="params">(<span class="keyword">int</span> size, <span class="keyword">int</span> mode)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (sUseZeroUnspecifiedMeasureSpec &amp;&amp; mode == UNSPECIFIED) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> makeMeasureSpec(size, mode);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">       </span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getMode</span><span class="params">(<span class="keyword">int</span> measureSpec)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> (measureSpec &amp; MODE_MASK);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getSize</span><span class="params">(<span class="keyword">int</span> measureSpec)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> (measureSpec &amp; ~MODE_MASK);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">adjust</span><span class="params">(<span class="keyword">int</span> measureSpec, <span class="keyword">int</span> delta)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">final</span> <span class="keyword">int</span> mode = getMode(measureSpec);</span><br><span class="line">            <span class="keyword">int</span> size = getSize(measureSpec);</span><br><span class="line">            <span class="keyword">if</span> (mode == UNSPECIFIED) &#123;</span><br><span class="line">                <span class="comment">// No need to adjust size for UNSPECIFIED mode.</span></span><br><span class="line">                <span class="keyword">return</span> makeMeasureSpec(size, UNSPECIFIED);</span><br><span class="line">            &#125;</span><br><span class="line">            size += delta;</span><br><span class="line">            <span class="keyword">if</span> (size &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                Log.e(VIEW_LOG_TAG, <span class="string">"MeasureSpec.adjust: new size would be negative! ("</span> + size +</span><br><span class="line">                        <span class="string">") spec: "</span> + toString(measureSpec) + <span class="string">" delta: "</span> + delta);</span><br><span class="line">                size = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> makeMeasureSpec(size, mode);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/28/effctive-java-class-interface/" itemprop="url">
+                  effctive-java读书笔记（类和接口）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-12-28T11:13:44+08:00" content="2015-12-28">
+              2015-12-28
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/28/effctive-java-class-interface/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/28/effctive-java-class-interface/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h3 id="u4F7F_u7C7B_u548C_u6210_u5458_u7684_u53EF_u8BBF_u95EE_u6027_u6700_u5C0F_u5316"><a href="#u4F7F_u7C7B_u548C_u6210_u5458_u7684_u53EF_u8BBF_u95EE_u6027_u6700_u5C0F_u5316" class="headerlink" title="使类和成员的可访问性最小化"></a>使类和成员的可访问性最小化</h3><p>模块设计好坏的最重要的因素是：该模块对于外部的其它模块而言，是否能<strong>隐藏它的内部数据和其它实现细节</strong>。</p>
+<p>设计良好的模块:</p>
+<ul>
+<li>隐藏所有的实现细节(把它的API和它的实现隔离开)</li>
+<li>模块之间只通过API进行通信（模块不需要知道其他模块的内部工作情况）</li>
+</ul>
+<p>上面那个概念叫做<strong>信息隐藏(information hiding),封装(encapsulation)</strong></p>
+<p>Java提供许多机制协助信息隐藏：</p>
+<ul>
+<li>访问控制机制(类，接口和成员的可访问性)</li>
+<li>实体的可访问性(实体声明所在的位置和声明中的访问修饰符)</li>
+</ul>
+<blockquote>
+<p>尽可能使每个类或者成员不被外界访问</p>
+</blockquote>
+<p>对于顶层的（非嵌套的）类和接口，两种可能的访问级别：</p>
+<ul>
+<li>包级私有的(package-private)</li>
+<li>公有的(public)</li>
+</ul>
+<p>对于成员(域，方法，嵌套类和嵌套接口)有四种可能的访问级别:</p>
+<ul>
+<li><strong>私有的(private)</strong>——只有在声明该成员的<strong>顶层类内部</strong>才可以访问这个成员</li>
+<li><strong>包级私有的(package-private)</strong>——<strong>包内部</strong>的所有类</li>
+<li><strong>受保护的(protected)</strong>——<strong>包内部</strong>的所有类和<strong>子类</strong>(有限制)</li>
+<li><strong>公有的(public)</strong>——任何地方</li>
+</ul>
+<blockquote>
+<ul>
+<li>如果方法覆盖了超类中的一个方法，子类中的访问级别就不允许低于超类中的访问级别。</li>
+<li>不能为了测试，而将类，接口或者成员变成包的导出的API的一部分（可以让测试作为被测试的包的一部分来运行，从而能够访问它的包级私有元素)</li>
+<li>实例域决不能是公有的</li>
+<li>静态域也不能是公有的(例外情况：常量构成了类提供的整个抽象中的一部分，可通过公有的静态final域来暴露这些常量)</li>
+</ul>
+</blockquote>
+<p>长度非零的数组总是可变的，客户端能够修改数组中的内容。（安全漏洞的一个常见来源）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//潜在的安全漏洞</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Thing[] VALUES = &#123;...&#125;；</span><br><span class="line"><span class="comment">//解决方法:</span></span><br><span class="line"><span class="comment">//1.公有数组变私有的，并增加一个公有的不可变的列表</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Thing[] PRIVATE_VALUES = &#123;...&#125;；</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> List&lt;Thing&gt; VALUES = Collections.unmodifiableList(Arrays.asList(PRIVATE_VALUES));</span><br><span class="line"></span><br><span class="line"><span class="comment">//2.数组变私有的，并添加返回私有数组的一个备份的公有方法</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Thing[] PRIVATE_VALUES = &#123;...&#125;;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Thing[] values()&#123;</span><br><span class="line"><span class="keyword">return</span> PRIVATE_VALUES.clone();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="u5728_u516C_u6709_u7C7B_u4E2D_u4F7F_u7528_u8BBF_u95EE_u65B9_u6CD5_u800C_u975E_u516C_u6709_u57DF"><a href="#u5728_u516C_u6709_u7C7B_u4E2D_u4F7F_u7528_u8BBF_u95EE_u65B9_u6CD5_u800C_u975E_u516C_u6709_u57DF" class="headerlink" title="在公有类中使用访问方法而非公有域"></a>在公有类中使用访问方法而非公有域</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//退化类，无作用，只是用来集中实例域</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span></span>&#123;</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">double</span> x;</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">double</span> y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>退化类的数据域可以直接访问，没有提供封装的功能。对于可变的类来说，应该用包含私有域和公有设值方法(setter)的类代替:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span></span>&#123;</span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">double</span> x;</span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">double</span> y;</span><br><span class="line">   </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="title">Point</span><span class="params">(<span class="keyword">double</span> x.<span class="keyword">double</span> y)</span></span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.x = x;</span><br><span class="line">      <span class="keyword">this</span>.y = y;</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">getX</span><span class="params">()</span></span>&#123;</span><br><span class="line">   <span class="keyword">return</span> x;&#125;</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">double</span> getY（）&#123;</span><br><span class="line">   <span class="keyword">return</span> y;&#125;</span><br><span class="line">   </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setX</span><span class="params">(<span class="keyword">double</span> x)</span></span>&#123;</span><br><span class="line">   <span class="keyword">this</span>.x = x;&#125;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setY</span><span class="params">(<span class="keyword">double</span> y)</span></span>&#123;</span><br><span class="line">   <span class="keyword">this</span>.y = y;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果类可以在它所在的包得外部进行访问，就提供访问方法。</p>
+<p>如果类是包级私有的，或是私有的嵌套类，直接暴露数据域并没有错误。</p>
+<h3 id="u4F7F_u53EF_u53D8_u6027_u6700_u5C0F_u5316"><a href="#u4F7F_u53EF_u53D8_u6027_u6700_u5C0F_u5316" class="headerlink" title="使可变性最小化"></a>使可变性最小化</h3><p>不可变类只是其实例不能被修改的类。常见的不可变类有:String,基本类型的包装类,BigInteger和BigDecimal等</p>
+<blockquote>
+<p>每个实例中包含的所有信息都必须在创建该实例的时候提供，并在对象的整个生命周期内固定不变。</p>
+</blockquote>
+<p>使类成为不可变的五条原则:</p>
+<ul>
+<li>1.不要提供任何会修改对象状态的方法(即改变对象属性的方法)</li>
+<li>2.保证类不会被拓展（final class）</li>
+<li>3.使所有的域都是final的</li>
+<li>4.使所有的域都是私有的</li>
+<li>5.确保对于任何可变组件的互斥访问</li>
+</ul>
+<p>不可变对象本质上是线程安全的，不要求同步。不可变对象可以被自由地共享。不可变类应该重用现有的实例。对于频繁用到的值，为它们提供公有的静态final常量。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//不可变类Complex复数类。对于频繁用到的0，1，i，重用现有的实例</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Complex ZERO = <span class="keyword">new</span> Complex(<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Complex ONE = <span class="keyword">new</span> Complex(<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Complex I = <span class="keyword">new</span> Complex(<span class="number">0</span>,<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<p>不可变对象为其他对象提供了大量的构件(building blocks)</p>
+<p>不可变类真正唯一的缺点是对于每个不同的值都需要一个单独的对象。<br>执行一个多步骤的操作，每个步骤都会产生一个新的对象，除了最后的结果之外其他的对象最终都会被丢弃。导致性能问题暴露出来。</p>
+<p>不可变类String类的可变配套类是StringBuilder</p>
+<p>对于构建不可变的类，为了确保不可变性，类绝对不允许自身被子类化:</p>
+<ul>
+<li>1.使类成为final的</li>
+<li>2.让类的所有构造器都变成私有的或包级私有的，并添加公有的静态工厂方法代替公有的构造器</li>
+</ul>
+<h3 id="u590D_u5408_u4F18_u4E8E_u7EE7_u627F"><a href="#u590D_u5408_u4F18_u4E8E_u7EE7_u627F" class="headerlink" title="复合优于继承"></a>复合优于继承</h3><p>继承：可实现代码重用，但并非永远是完成这项工作的最佳工具</p>
+<p>安全的继承:</p>
+<ul>
+<li>包内继承</li>
+<li>专门为了继承而设计的，具有良好文档说明的类的继承</li>
+</ul>
+<p>不安全的继承：</p>
+<ul>
+<li>对普通的具体类进行跨越包边界的继承</li>
+</ul>
+<p>继承打破了封装性（即子类依赖于其超类中特定功能的实现细节）</p>
+<p>解决方法：使用复合代替继承（不用拓展现有的类，而是在新的类中增加一个私有域，引用现有类的一个实例，现有类变成新类的一个组件）</p>
+<p><strong>只有当子类真正是超类的子类型(subtype)时，才适合用继承</strong></p>
+<p>对于类A和B，只有两者之间确实存在”is-a”关系的时候，类B才应该拓展类A。</p>
+<p>继承机制会把超类API中的所有缺陷传播到子类中，而复合则允许设计新的API来隐藏这些缺陷。</p>
+<p>结论：继承的功能非常强大，但存在很多问题。它违背了封装原则。只有当子类和超类之间确实存在子类型关系时，使用继承才是恰当的。若子类和超类处在不同的包中，并且超类并不是为了继承而设计的，那么继承将会导致脆弱性。可以用复合和转发机制代替继承，尤其是当存在适当的接口可以实现包装类的时候，包装类不仅比子类更加健壮，而且功能更加强大。</p>
+<h3 id="u63A5_u53E3_u4F18_u4E8E_u62BD_u8C61_u7C7B"><a href="#u63A5_u53E3_u4F18_u4E8E_u62BD_u8C61_u7C7B" class="headerlink" title="接口优于抽象类"></a>接口优于抽象类</h3><p>Java中定义允许多个实现的类型：<strong>接口和抽象类</strong></p>
+<p>区别：</p>
+<ul>
+<li>抽象类允许包含某些方法的实现，但接口不允许。</li>
+<li>抽象类作为类型定义受到了极大的限制（为了实现由抽象类定义的类型，类必须为抽象类的一个子类，而接口不管这个类是否处于类层次的哪个位置）</li>
+</ul>
+<p>实现新的接口，现有的类可以很容易被更新。</p>
+<blockquote>
+<p>实现新的接口只需要在类的声明中增加一个implements子句，增加必要的方法。无法更新现有的类来拓展新的抽象类，两个类拓展同一个抽象类，必须把抽象类放到类型层次的高度，使这两个类的祖先先成为它的子类，会间接地伤害类层次。</p>
+</blockquote>
+<p>接口是定义混合类型的理想选择。</p>
+<blockquote>
+<p>类除了实现它的基本类型之外，还可以实现混合类型，表明它提供某些可选择的行为。</p>
+</blockquote>
+<p>接口允许我们构造非层次结构的类型框架。</p>
+<blockquote>
+<p>类型层次对于卒子某些事物非常合适，但是其他有些事物并不能被整齐地组织成一个严格的层次结构。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Singer</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">singing</span><span class="params">(String songname)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">SongWriter</span> </span>&#123;</span><br><span class="line">    <span class="function">String <span class="title">writeSong</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">SingerSongwriter</span> <span class="keyword">extends</span> <span class="title">Singer</span>,<span class="title">SongWriter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="u63A5_u53E3_u53EA_u7528_u4E8E_u5B9A_u4E49_u7C7B_u578B"><a href="#u63A5_u53E3_u53EA_u7528_u4E8E_u5B9A_u4E49_u7C7B_u578B" class="headerlink" title="接口只用于定义类型"></a>接口只用于定义类型</h3><p>类实现接口，接口充当引用这个类的实例的类型。为了其他任何目的定义接口都是不恰当的。</p>
+<p>例如常量接口(constant interface)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Constants</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> ONE = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TWO = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> THREE = <span class="number">3</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>常量接口会暴露实现细节到该类的导出API中。它代表了一种承诺，即使以后不需要这些常量了，也必须实现这个接口（以确保二进制兼容性）。</p>
+<p>导出常量的几种方式：</p>
+<ul>
+<li>将常量添加到类或接口中</li>
+<li>使用枚举类型</li>
+<li>使用不可实例化的工具类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NumConstants</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">NumConstants</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> ONE = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TWO = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> THREE = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="u7C7B_u5C42_u6B21_u4F18_u4E8E_u6807_u7B7E_u7C7B"><a href="#u7C7B_u5C42_u6B21_u4F18_u4E8E_u6807_u7B7E_u7C7B" class="headerlink" title="类层次优于标签类"></a>类层次优于标签类</h3><p>多种风格的实例的类，并包含实例风格的标签域。</p>
+<h3 id="u4F18_u5148_u8003_u8651_u9759_u6001_u6210_u5458_u7C7B"><a href="#u4F18_u5148_u8003_u8651_u9759_u6001_u6210_u5458_u7C7B" class="headerlink" title="优先考虑静态成员类"></a>优先考虑静态成员类</h3><p>嵌套类(nested class):定义在另一个类内部的类，为它的外部类（enclosing class）提供服务。</p>
+<blockquote>
+<p>若嵌套类将来可能用于其他的某个环境中，它就应该是顶层类，而不是嵌套类</p>
+</blockquote>
+<p>四种嵌套类:</p>
+<ul>
+<li>1.静态成员类(static member class)</li>
+<li>2.非静态成员类(nonstatic member class)</li>
+<li>3.匿名类(anonymous class)</li>
+<li>4.局部类(local class)</li>
+</ul>
+<p>静态成员类：是外部类的一个静态成员，是最简单的一种嵌套类。可将它看做是普通的类，只是声明在另一个类的内部而已。可以访问外部类的所有成员（包括私有成员）</p>
+<p>非静态成员类和静态成员类的区别:</p>
+<blockquote>
+<ul>
+<li>静态成员类的声明中包含修饰符static</li>
+<li>非静态成员的每个实例都隐含着外部类的一个外围实例(enclosing instance)</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NestedClazz</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> year = <span class="number">2015</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> month;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> day;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">NestedClazz</span><span class="params">(<span class="keyword">int</span> month, <span class="keyword">int</span> day)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.month = month;</span><br><span class="line">        <span class="keyword">this</span>.day = day;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//静态成员类</span></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticMemberClazz</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">foo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="comment">//访问外部类的所有成员,包括声明为private的成员</span></span><br><span class="line">            NestedClazz clazz = <span class="keyword">new</span> NestedClazz(<span class="number">12</span>, <span class="number">31</span>);</span><br><span class="line">            System.out.println(<span class="string">"StaticClass static method:"</span> + year + <span class="string">"-"</span> + clazz.month + <span class="string">"-"</span> + clazz.day);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">nonStaticFoo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            System.out.println(year);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//非静态成员类</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">NonStaticClazz</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            System.out.println(<span class="string">"NonStaticClass non static method:"</span> + year + month + day);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//非静态内部类和外部类建立联系的一种方式</span></span><br><span class="line">        NonStaticClazz nonStaticClazz = <span class="keyword">new</span> NonStaticClazz();</span><br><span class="line">        nonStaticClazz.foo();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//静态类的初始化</span></span><br><span class="line">        NestedClazz.StaticMemberClazz staticMemberClazz = <span class="keyword">new</span> NestedClazz.StaticMemberClazz();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//静态类的静态方法</span></span><br><span class="line">        StaticMemberClazz.foo();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//静态的非静态方法</span></span><br><span class="line">        staticMemberClazz.nonStaticFoo();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//外部类的初始化</span></span><br><span class="line">        NestedClazz nestedClazz = <span class="keyword">new</span> NestedClazz(<span class="number">12</span>, <span class="number">31</span>);</span><br><span class="line">        <span class="comment">//非静态内部类的初始化</span></span><br><span class="line">        <span class="comment">//1.非静态内部类和外部类建立关联的一种方式</span></span><br><span class="line">        nestedClazz.test();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2.非静态内部类和外部类建立关联的另一种方式</span></span><br><span class="line">        NonStaticClazz nonStaticClazz = nestedClazz.new NonStaticClazz();</span><br><span class="line">        <span class="comment">//非静态内部类的非静态方法</span></span><br><span class="line">        nonStaticClazz.foo();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>匿名类:不同于Java中的其他任何语法单元。没有名字，不是外部类的一个成员。在使用的同时被声明和实例化。</p>
+<p>匿名类的适用性受到很多限制:</p>
+<ul>
+<li>1.无法实例化</li>
+<li>2.不能执行instanceof测试或做任何需要命名类的其他事情</li>
+<li>3.无法实现多个接口或拓展一个类，或同时拓展类和实现接口。</li>
+</ul>
+<p>匿名类的用法:</p>
+<ul>
+<li>动态创建函数对象</li>
+<li>创建过程对象(如Runnable,Thread,TimerTask实例)</li>
+<li>在静态工厂方法内部</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnnoymousClazz</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//匿名类的三种用法</span></span><br><span class="line">        <span class="comment">//1.动态地创建函数对象</span></span><br><span class="line">        String [] strings = &#123;<span class="string">"a"</span>,<span class="string">"b"</span>,<span class="string">"c"</span>&#125;;</span><br><span class="line">        Arrays.sort(strings, <span class="keyword">new</span> Comparator&lt;String&gt;() &#123;</span><br><span class="line">            <span class="annotation">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(String o1, String o2)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> o1.length()-o2.length();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">//2.创建过程对象</span></span><br><span class="line">        Thread thread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">            <span class="annotation">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        thread.start();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3.在静态工厂方法的内部</span></span><br><span class="line">        <span class="keyword">int</span> a[] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line">        List&lt;Integer&gt; integers = intArrayAsList(a);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">static</span> List&lt;Integer&gt; <span class="title">intArrayAsList</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span>[] a)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(a==<span class="keyword">null</span>) <span class="keyword">throw</span>  <span class="keyword">new</span> NullPointerException();</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> AbstractList&lt;Integer&gt;() &#123;</span><br><span class="line">            <span class="annotation">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> Integer <span class="title">get</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> a[index];</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="annotation">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> a.length;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="annotation">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> Integer <span class="title">set</span><span class="params">(<span class="keyword">int</span> index, Integer element)</span> </span>&#123;</span><br><span class="line">                 <span class="keyword">int</span> old = a[index];</span><br><span class="line">                 a[index] = old;</span><br><span class="line">                <span class="keyword">return</span> old;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>局部类:用得最少。在任何可以声明局部变量的地方都可以声明局部类。<br>有名字（与成员类一样），必须非常简短，以便不影响可读性(与匿名类一样)，在非静态环境中定义的时候，才有外围实例，也不能包含静态成员（与匿名类一样）</p>
 
             
           </span>
@@ -897,7 +1216,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-count">8</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
