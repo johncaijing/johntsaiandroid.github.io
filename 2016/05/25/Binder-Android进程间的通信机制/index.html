@@ -53,16 +53,14 @@
 
 
 
-<meta name="description" content="Binder:Android进程间的通信机制
-在我们之前的文章Android一瞥中，我们介绍了Android的发展历程，解释了它的软件架构以及在Android平台开发应用需要注意什么。在本篇文章中，我将深入讨论Binder,复杂并且巨大的Android平台中的核心子系统。我将解释Binder中提供的不同组件,应用进程如何与系统进程通信，以及数据是如何被分享的。
-由于智能手机的硬件性能的提升，被称为">
+<meta name="description" content="在我们之前的文章Android一瞥中，我们介绍了Android的发展历程，解释了它的软件架构以及在Android平台开发应用需要注意什么。在本篇文章中，我将深入讨论Binder,复杂并且巨大的Android平台中的核心子系统。我将解释Binder中提供的不同组件,应用进程如何与系统进程通信，以及数据是如何被分享的。
+由于智能手机的硬件性能的提升，被称为手中的PC，智能手机开始取代PC。伴随这种趋势">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Binder:Android进程间的通信机制">
 <meta property="og:url" content="http://yoursite.com/2016/05/25/Binder-Android进程间的通信机制/index.html">
 <meta property="og:site_name" content="JohnTsai">
-<meta property="og:description" content="Binder:Android进程间的通信机制
-在我们之前的文章Android一瞥中，我们介绍了Android的发展历程，解释了它的软件架构以及在Android平台开发应用需要注意什么。在本篇文章中，我将深入讨论Binder,复杂并且巨大的Android平台中的核心子系统。我将解释Binder中提供的不同组件,应用进程如何与系统进程通信，以及数据是如何被分享的。
-由于智能手机的硬件性能的提升，被称为">
+<meta property="og:description" content="在我们之前的文章Android一瞥中，我们介绍了Android的发展历程，解释了它的软件架构以及在Android平台开发应用需要注意什么。在本篇文章中，我将深入讨论Binder,复杂并且巨大的Android平台中的核心子系统。我将解释Binder中提供的不同组件,应用进程如何与系统进程通信，以及数据是如何被分享的。
+由于智能手机的硬件性能的提升，被称为手中的PC，智能手机开始取代PC。伴随这种趋势">
 <meta property="og:image" content="http://yoursite.com/image/android-logo.png">
 <meta property="og:image" content="http://yoursite.com/image/typical-schematic-of-android_structure.png">
 <meta property="og:image" content="http://yoursite.com/image/process_management_of_linux-kernel.png">
@@ -73,12 +71,11 @@
 <meta property="og:image" content="http://yoursite.com/image/binder_driver_configuration.png">
 <meta property="og:image" content="http://yoursite.com/image/transfer_structure_of_user_data_between_processes_through_binder_driver.png">
 <meta property="og:image" content="http://yoursite.com/image/c++framefork_that_transltes_data_translated_to_rpc_through_binder_driver.png">
-<meta property="og:updated_time" content="2016-06-02T15:44:02.000Z">
+<meta property="og:updated_time" content="2016-07-19T06:48:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Binder:Android进程间的通信机制">
-<meta name="twitter:description" content="Binder:Android进程间的通信机制
-在我们之前的文章Android一瞥中，我们介绍了Android的发展历程，解释了它的软件架构以及在Android平台开发应用需要注意什么。在本篇文章中，我将深入讨论Binder,复杂并且巨大的Android平台中的核心子系统。我将解释Binder中提供的不同组件,应用进程如何与系统进程通信，以及数据是如何被分享的。
-由于智能手机的硬件性能的提升，被称为">
+<meta name="twitter:description" content="在我们之前的文章Android一瞥中，我们介绍了Android的发展历程，解释了它的软件架构以及在Android平台开发应用需要注意什么。在本篇文章中，我将深入讨论Binder,复杂并且巨大的Android平台中的核心子系统。我将解释Binder中提供的不同组件,应用进程如何与系统进程通信，以及数据是如何被分享的。
+由于智能手机的硬件性能的提升，被称为手中的PC，智能手机开始取代PC。伴随这种趋势">
 
 
 
@@ -272,7 +269,7 @@
       
 
       
-        <span itemprop="articleBody"><h2 id="Binder_3AAndroid_u8FDB_u7A0B_u95F4_u7684_u901A_u4FE1_u673A_u5236"><a href="#Binder_3AAndroid_u8FDB_u7A0B_u95F4_u7684_u901A_u4FE1_u673A_u5236" class="headerlink" title="Binder:Android进程间的通信机制"></a>Binder:Android进程间的通信机制</h2><p><img src="/image/android-logo.png" alt=""></p>
+        <span itemprop="articleBody"><p><img src="/image/android-logo.png" alt=""></p>
 <p>在我们之前的文章<a href="/image/android-at-a-glance/">Android一瞥</a>中，我们介绍了Android的发展历程，解释了它的软件架构以及在Android平台开发应用需要注意什么。在本篇文章中，我将深入讨论<strong>Binder</strong>,复杂并且巨大的Android平台中的核心子系统。我将解释Binder中提供的不同组件,应用进程如何与系统进程通信，以及数据是如何被分享的。</p>
 <p>由于智能手机的硬件性能的提升，被称为手中的PC，智能手机开始取代PC。伴随这种趋势，移动操作系统也开始支持多任务和使用多核CPU处理各种多媒体任务。大多数移动操作系统都是基于PC操作系统的。保留了现有PC操作系统的架构，内核稍作了修改以满足移动环境的要求，并添加一些优化的功能。Windows Phone基于微软Windows系统，iOS基于Mac的OS X，Google的Android系统基于Linux内核，三者都是最受欢迎的移动操作系统。<br><a id="more"></a> </p>
 <h4 id="u667A_u80FD_u624B_u673A-_u624B_u4E2D_u7684_u7535_u8111_uFF0C_u624B_u4E2D_u7684PC_u64CD_u4F5C_u7CFB_u7EDF"><a href="#u667A_u80FD_u624B_u673A-_u624B_u4E2D_u7684_u7535_u8111_uFF0C_u624B_u4E2D_u7684PC_u64CD_u4F5C_u7CFB_u7EDF" class="headerlink" title="智能手机-手中的电脑，手中的PC操作系统"></a>智能手机-手中的电脑，手中的PC操作系统</h4><p>如果你有类似这样的疑问，</p>
@@ -523,7 +520,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Binder_3AAndroid_u8FDB_u7A0B_u95F4_u7684_u901A_u4FE1_u673A_u5236"><span class="nav-number">1.</span> <span class="nav-text">Binder:Android进程间的通信机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#u667A_u80FD_u624B_u673A-_u624B_u4E2D_u7684_u7535_u8111_uFF0C_u624B_u4E2D_u7684PC_u64CD_u4F5C_u7CFB_u7EDF"><span class="nav-number">1.0.1.</span> <span class="nav-text">智能手机-手中的电脑，手中的PC操作系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u4E0D_u7BA1_u600E_u6837_uFF0C_u5B83_u90FD_u662FLinux_u8FDB_u7A0B"><span class="nav-number">1.0.2.</span> <span class="nav-text">不管怎样，它都是Linux进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u7ED1_u5B9A_u6240_u6709_u529F_u80FD_u7684Binder"><span class="nav-number">1.0.3.</span> <span class="nav-text">绑定所有功能的Binder</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u7ED3_u8BBA"><span class="nav-number">1.0.4.</span> <span class="nav-text">结论</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#u667A_u80FD_u624B_u673A-_u624B_u4E2D_u7684_u7535_u8111_uFF0C_u624B_u4E2D_u7684PC_u64CD_u4F5C_u7CFB_u7EDF"><span class="nav-number">1.</span> <span class="nav-text">智能手机-手中的电脑，手中的PC操作系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u4E0D_u7BA1_u600E_u6837_uFF0C_u5B83_u90FD_u662FLinux_u8FDB_u7A0B"><span class="nav-number">2.</span> <span class="nav-text">不管怎样，它都是Linux进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u7ED1_u5B9A_u6240_u6709_u529F_u80FD_u7684Binder"><span class="nav-number">3.</span> <span class="nav-text">绑定所有功能的Binder</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u7ED3_u8BBA"><span class="nav-number">4.</span> <span class="nav-text">结论</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
