@@ -208,15 +208,91 @@
 
     
     
+
+    
       
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/19/Android如何从堆栈中还原ProGuard混淆后的代码/" itemprop="url">
+                  未命名
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-07-19T14:42:44+08:00" content="2016-07-19">
+              2016-07-19
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
       
-        
-        
-        
       
 
       
-    
+        
+          <p>title:Android:如何从堆栈中还原ProGuard混淆后的代码<br>date:2016-07-19 14:41:00</p>
+<h2 id="tags_3A_u7B97_u6CD5"><a href="#tags_3A_u7B97_u6CD5" class="headerlink" title="tags:算法"></a>tags:算法</h2><h1 id="Android_3A_u5982_u4F55_u4ECE_u5806_u6808_u4E2D_u8FD8_u539FProGuard_u6DF7_u6DC6_u540E_u7684_u4EE3_u7801"><a href="#Android_3A_u5982_u4F55_u4ECE_u5806_u6808_u4E2D_u8FD8_u539FProGuard_u6DF7_u6DC6_u540E_u7684_u4EE3_u7801" class="headerlink" title="Android:如何从堆栈中还原ProGuard混淆后的代码"></a>Android:如何从堆栈中还原ProGuard混淆后的代码</h1><p>本文翻译自<a href="http://simplyadvanced.net/blog/android-how-to-decode-proguards-obfuscated-code-from-stack-trace/">Android: How To Decode ProGuard’s Obfuscated Code From Stack Trace</a></p>
+<p>本篇文章是写给那些在他们的应用中使用<a href="http://developer.android.com/tools/help/proguard.html">ProGuard</a>并且需要从堆栈信息中进行调试的Android开发者。这是一种非常简单就将混淆的错误信息转化为可读的方法。</p>
+<h3 id="u8FD8_u539F_u524D"><a href="#u8FD8_u539F_u524D" class="headerlink" title="还原前"></a>还原前</h3><p>以下是ProGuard混淆过的堆栈信息:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Caused by: java<span class="class">.lang</span><span class="class">.NullPointerException</span></span><br><span class="line">at net<span class="class">.simplyadvanced</span><span class="class">.ltediscovery</span><span class="class">.be</span><span class="class">.u</span>(Unknown Source)</span><br><span class="line">at net<span class="class">.simplyadvanced</span><span class="class">.ltediscovery</span><span class="class">.at</span><span class="class">.v</span>(Unknown Source)</span><br><span class="line">at net<span class="class">.simplyadvanced</span><span class="class">.ltediscovery</span><span class="class">.at</span><span class="class">.d</span>(Unknown Source)</span><br><span class="line">at net<span class="class">.simplyadvanced</span><span class="class">.ltediscovery</span><span class="class">.av</span><span class="class">.onReceive</span>(Unknown Source)</span><br></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/07/19/Android如何从堆栈中还原ProGuard混淆后的代码/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
 
     
       
@@ -280,35 +356,6 @@
 <p>今天，我们研究的是——<strong>反转字符串</strong>。</p>
 <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//输入一个字符串，输出它的倒序字符串</span></span><br><span class="line"><span class="string">input:</span>  Hello</span><br><span class="line"><span class="string">output:</span> olleH</span><br></pre></td></tr></table></figure>
 <h4 id="u51E0_u79CD_u89E3_u6CD5"><a href="#u51E0_u79CD_u89E3_u6CD5" class="headerlink" title="几种解法"></a>几种解法</h4>  <figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">string</span>: <span class="string"> Hello</span></span><br><span class="line"><span class="attribute">length</span>: <span class="string"> 5</span></span><br><span class="line"></span><br><span class="line"><span class="cpp">        <span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> </span><br><span class="line">before: H e l l o</span><br><span class="line">after:  o l l e H</span><br><span class="line"></span><br><span class="line">index             sum</span><br><span class="line"><span class="number">0</span>: H---&gt;o  <span class="number">0</span>--&gt;<span class="number">4</span>  <span class="number">4</span></span><br><span class="line"><span class="number">1</span>: e---&gt;l  <span class="number">1</span>--&gt;<span class="number">3</span>  <span class="number">4</span></span><br><span class="line"><span class="number">2</span>: l---&gt;l  <span class="number">2</span>--&gt;<span class="number">2</span>  <span class="number">4</span></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">分析字符串反转前后的规律可知:</span><br><span class="line">    两个反转字符串字符的下标之和为字符串长度-<span class="number">1.</span></span></span><br></pre></td></tr></table></figure>
-<h5 id="1-_u4F7F_u7528_u6570_u7EC4"><a href="#1-_u4F7F_u7528_u6570_u7EC4" class="headerlink" title="1.<strong>使用数组</strong>"></a>1.<strong>使用数组</strong></h5><p>  最常规的解法，也是我们在面试的时候最容易想到的一种方法。</p>
-<p>  <strong>具体思路</strong>是:</p>
-<pre><code>* 将字符串转换为char数组
-* 遍历循环给char数组赋值
-</code></pre><p>   <strong>编码实现</strong>：</p>
-   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">strReverseWithArray</span><span class="params">(String string)</span></span>&#123;</span><br><span class="line">     <span class="keyword">if</span>(string==<span class="keyword">null</span>||string.length()==<span class="number">0</span>)<span class="keyword">return</span> string;</span><br><span class="line">     <span class="keyword">int</span> length = string.length();</span><br><span class="line">     <span class="keyword">char</span> [] array = string.toCharArray();</span><br><span class="line">     <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;length;i++)&#123;</span><br><span class="line">         array[i] = string.charAt(length-<span class="number">1</span>-i);</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">return</span> <span class="keyword">new</span> String(array);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<p>  <strong>优化</strong>：</p>
-<p>   分析上一种解法，循环遍历时，我们不需要循环这么多次。每次循环的时候，我们应该直接给前、后位置都赋值。</p>
-<p>   <strong>编码实现</strong>:</p>
-   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">strReverseWithArray2</span><span class="params">(String string)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(string==<span class="keyword">null</span>||string.length()==<span class="number">0</span>)<span class="keyword">return</span> string;</span><br><span class="line">    <span class="keyword">int</span> length = string.length();</span><br><span class="line">    <span class="keyword">char</span> [] array = string.toCharArray();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;length/<span class="number">2</span>;i++)&#123;</span><br><span class="line">        array[i] = string.charAt(length-<span class="number">1</span>-i);</span><br><span class="line">        array[length-<span class="number">1</span>-i] = string.charAt(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> String(array);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="2-_u4F7F_u7528_u6808"><a href="#2-_u4F7F_u7528_u6808" class="headerlink" title="2.<strong>使用栈</strong>"></a>2.<strong>使用栈</strong></h5><p>  我们都知道，栈有”后进先出(LIFO)”的特点。这一特点刚好用于反转字符串。</p>
-<p>  <strong>具体思路</strong>是:</p>
-<ul>
-<li>将字符串转换为char数组</li>
-<li>将char数组中的字符依次压入栈中</li>
-<li><p>将栈中的字符依次弹出赋值给char数组</p>
-<p><strong>编码实现</strong>：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">strReverseWithStack</span><span class="params">(String string)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(string==<span class="keyword">null</span>||string.length()==<span class="number">0</span>)<span class="keyword">return</span> string;</span><br><span class="line">    Stack&lt;Character&gt; stringStack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">    <span class="keyword">char</span> [] array = string.toCharArray();</span><br><span class="line">    <span class="keyword">for</span>(Character c:array)&#123;</span><br><span class="line">        stringStack.push(c);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> length = string.length();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i= <span class="number">0</span>;i&lt;length;i++)&#123;</span><br><span class="line">        array[i] = stringStack.pop();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> String(array);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h5 id="3-_u9006_u5E8F_u904D_u5386"><a href="#3-_u9006_u5E8F_u904D_u5386" class="headerlink" title="3.<strong>逆序遍历</strong>"></a>3.<strong>逆序遍历</strong></h5><p>   仔细观察会发现，反转字符串实际上是逆序输出字符串中的字符。</p>
-<p>   <strong>具体思路</strong>是:</p>
-<ul>
-<li>逆序遍历字符串中的字符，并将它依次添加到StringBuilder中</li>
-</ul>
-<p><strong>编码实现</strong>：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">strReverseWithReverseLoop</span><span class="params">(String string)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(string==<span class="keyword">null</span>||string.length()==<span class="number">0</span>)<span class="keyword">return</span> string;</span><br><span class="line">        StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = string.length()-<span class="number">1</span>;i&gt;=<span class="number">0</span>;i--)&#123;</span><br><span class="line">            sb.append(string.charAt(i));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sb.toString();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<h5 id="4-_u4F7F_u7528_u4F4D_u8FD0_u7B97"><a href="#4-_u4F7F_u7528_u4F4D_u8FD0_u7B97" class="headerlink" title="4.<strong>使用位运算</strong>"></a>4.<strong>使用位运算</strong></h5><p> 计算机的数据流本质上都是0，1二进制数据。字符串也是一样。而二进制数据的处理往往是通过位运算来实现的。位操作有:<strong>与，或，非，异或</strong>。</p>
-<p> 对位运算有过了解的应该知道，使用<strong>异或操作</strong>能实现交换两个变量的值而不引入第三个变量。</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/06/22/深入浅出经典面试题之——反转字符串/#more" rel="contents">
               阅读全文 &raquo;
@@ -726,7 +773,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-count">6</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

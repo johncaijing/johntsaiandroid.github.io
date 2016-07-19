@@ -63,7 +63,7 @@
 <meta property="og:description" content="深入浅出经典面试题之——反转字符串前言如今无论大小公司，都喜欢出一些算法题来测试面试者的算法功底或者说是计算机功底。而如今Android和Java把很多方法都封装成API了，导致我们写代码往往只是调调API，没有深入了解过一些功能的底层算法实现。因此，研究算法一是能在面试中正确快速的解决算法题，而是能提高我们的编程功底，更好地编写出高效稳健的代码。
 今天，我们研究的是——反转字符串。
 123//输">
-<meta property="og:updated_time" content="2016-06-22T05:50:51.000Z">
+<meta property="og:updated_time" content="2016-07-19T06:40:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入浅出经典面试题之——反转字符串">
 <meta name="twitter:description" content="深入浅出经典面试题之——反转字符串前言如今无论大小公司，都喜欢出一些算法题来测试面试者的算法功底或者说是计算机功底。而如今Android和Java把很多方法都封装成API了，导致我们写代码往往只是调调API，没有深入了解过一些功能的底层算法实现。因此，研究算法一是能在面试中正确快速的解决算法题，而是能提高我们的编程功底，更好地编写出高效稳健的代码。
@@ -266,6 +266,7 @@
 <p>今天，我们研究的是——<strong>反转字符串</strong>。</p>
 <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//输入一个字符串，输出它的倒序字符串</span></span><br><span class="line"><span class="string">input:</span>  Hello</span><br><span class="line"><span class="string">output:</span> olleH</span><br></pre></td></tr></table></figure>
 <h4 id="u51E0_u79CD_u89E3_u6CD5"><a href="#u51E0_u79CD_u89E3_u6CD5" class="headerlink" title="几种解法"></a>几种解法</h4>  <figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">string</span>: <span class="string"> Hello</span></span><br><span class="line"><span class="attribute">length</span>: <span class="string"> 5</span></span><br><span class="line"></span><br><span class="line"><span class="cpp">        <span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> </span><br><span class="line">before: H e l l o</span><br><span class="line">after:  o l l e H</span><br><span class="line"></span><br><span class="line">index             sum</span><br><span class="line"><span class="number">0</span>: H---&gt;o  <span class="number">0</span>--&gt;<span class="number">4</span>  <span class="number">4</span></span><br><span class="line"><span class="number">1</span>: e---&gt;l  <span class="number">1</span>--&gt;<span class="number">3</span>  <span class="number">4</span></span><br><span class="line"><span class="number">2</span>: l---&gt;l  <span class="number">2</span>--&gt;<span class="number">2</span>  <span class="number">4</span></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">分析字符串反转前后的规律可知:</span><br><span class="line">    两个反转字符串字符的下标之和为字符串长度-<span class="number">1.</span></span></span><br></pre></td></tr></table></figure>
+<a id="more"></a> 
 <h5 id="1-_u4F7F_u7528_u6570_u7EC4"><a href="#1-_u4F7F_u7528_u6570_u7EC4" class="headerlink" title="1.<strong>使用数组</strong>"></a>1.<strong>使用数组</strong></h5><p>  最常规的解法，也是我们在面试的时候最容易想到的一种方法。</p>
 <p>  <strong>具体思路</strong>是:</p>
 <pre><code>* 将字符串转换为char数组
@@ -295,7 +296,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">strReverseWithReverseLoop</span><span class="params">(String string)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(string==<span class="keyword">null</span>||string.length()==<span class="number">0</span>)<span class="keyword">return</span> string;</span><br><span class="line">        StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = string.length()-<span class="number">1</span>;i&gt;=<span class="number">0</span>;i--)&#123;</span><br><span class="line">            sb.append(string.charAt(i));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sb.toString();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <h5 id="4-_u4F7F_u7528_u4F4D_u8FD0_u7B97"><a href="#4-_u4F7F_u7528_u4F4D_u8FD0_u7B97" class="headerlink" title="4.<strong>使用位运算</strong>"></a>4.<strong>使用位运算</strong></h5><p> 计算机的数据流本质上都是0，1二进制数据。字符串也是一样。而二进制数据的处理往往是通过位运算来实现的。位操作有:<strong>与，或，非，异或</strong>。</p>
 <p> 对位运算有过了解的应该知道，使用<strong>异或操作</strong>能实现交换两个变量的值而不引入第三个变量。</p>
- <a id="more"></a> 
+ <!-- more --> 
 <p> <strong>实现原理</strong>:</p>
 <ul>
 <li><p>首先介绍异或操作</p>
@@ -346,6 +347,10 @@
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/19/Android如何从堆栈中还原ProGuard混淆后的代码/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -436,7 +441,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-count">6</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
