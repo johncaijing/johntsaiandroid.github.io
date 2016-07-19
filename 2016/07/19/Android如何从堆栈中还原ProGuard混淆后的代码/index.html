@@ -66,7 +66,7 @@
 还原前以下是ProGuard混淆过的堆栈信息:
 12345Caused by: java.lang">
 <meta property="og:image" content="http://7xr1jz.com1.z0.glb.clouddn.com/androidQQ20160719-0.png">
-<meta property="og:updated_time" content="2016-07-19T06:48:24.000Z">
+<meta property="og:updated_time" content="2016-07-19T06:50:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android:如何从堆栈中还原ProGuard混淆后的代码">
 <meta name="twitter:description" content="本文翻译自Android: How To Decode ProGuard’s Obfuscated Code From Stack Trace
@@ -274,16 +274,14 @@
 <h3 id="u8FD8_u539F_u540E"><a href="#u8FD8_u539F_u540E" class="headerlink" title="还原后"></a>还原后</h3><p>只要在命令行写一行命令，混淆都将会被移除，如下所示：</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Caused by: java<span class="class">.lang</span><span class="class">.NullPointerException</span></span><br><span class="line">at net<span class="class">.simplyadvanced</span><span class="class">.ltediscovery</span><span class="class">.UtilTelephony</span><span class="class">.boolean</span> <span class="function"><span class="title">is800MhzNetwork</span><span class="params">()</span><span class="params">(Unknown Source)</span></span></span><br><span class="line">at net<span class="class">.simplyadvanced</span><span class="class">.ltediscovery</span><span class="class">.ServiceDetectLte</span><span class="class">.void</span> <span class="function"><span class="title">checkAndAlertUserIf800MhzConnected</span><span class="params">()</span><span class="params">(Unknown Source)</span></span></span><br><span class="line">at net<span class="class">.simplyadvanced</span><span class="class">.ltediscovery</span><span class="class">.ServiceDetectLte</span><span class="class">.void</span> <span class="function"><span class="title">startLocalBroadcastReceiver</span><span class="params">()</span><span class="params">(Unknown Source)</span></span></span><br><span class="line">at net<span class="class">.simplyadvanced</span><span class="class">.ltediscovery</span><span class="class">.ServiceDetectLte</span>$<span class="number">2</span><span class="class">.void</span> <span class="function"><span class="title">onReceive</span><span class="params">(android.content.Context,android.content.Intent)</span><span class="params">(Unknown Source)</span></span></span><br></pre></td></tr></table></figure>
 <h3 id="u5982_u4F55_u8FD8_u539F_u5806_u6808_u4FE1_u606F"><a href="#u5982_u4F55_u8FD8_u539F_u5806_u6808_u4FE1_u606F" class="headerlink" title="如何还原堆栈信息"></a>如何还原堆栈信息</h3><p>可以选择命令行或者GUI</p>
-<p>####GUI</p>
-<ul>
+<h4 id="GUI"><a href="#GUI" class="headerlink" title="GUI"></a>GUI</h4><ul>
 <li>1.打开<code>/tools/proguard/bin/proguardgui.bat</code></li>
 <li>2.选择左边栏的<code>ReTrace</code>选项</li>
 <li>3.添加你的mapping文件和混淆过的堆栈信息</li>
 <li>4.点击<code>ReTrace!</code></li>
 </ul>
 <p>如下图所示(译者注)<br><img src="http://7xr1jz.com1.z0.glb.clouddn.com/androidQQ20160719-0.png" alt=""></p>
-<p>####命令行</p>
-<ul>
+<h4 id="u547D_u4EE4_u884C"><a href="#u547D_u4EE4_u884C" class="headerlink" title="命令行"></a>命令行</h4><ul>
 <li>1.需要你的ProGuard的mapping文件和你想要还原的堆栈信息（如stacktrace.txt）</li>
 <li>2.最简单的方法就是将这些文件拷贝到<code>/tools/proguard/bin/</code>目录</li>
 <li>3.运行以下命令</li>
@@ -491,7 +489,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#u8FD8_u539F_u524D"><span class="nav-number">1.</span> <span class="nav-text">还原前</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u8FD8_u539F_u540E"><span class="nav-number">2.</span> <span class="nav-text">还原后</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u5982_u4F55_u8FD8_u539F_u5806_u6808_u4FE1_u606F"><span class="nav-number">3.</span> <span class="nav-text">如何还原堆栈信息</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#u8FD8_u539F_u524D"><span class="nav-number">1.</span> <span class="nav-text">还原前</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u8FD8_u539F_u540E"><span class="nav-number">2.</span> <span class="nav-text">还原后</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u5982_u4F55_u8FD8_u539F_u5806_u6808_u4FE1_u606F"><span class="nav-number">3.</span> <span class="nav-text">如何还原堆栈信息</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#GUI"><span class="nav-number">3.1.</span> <span class="nav-text">GUI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u547D_u4EE4_u884C"><span class="nav-number">3.2.</span> <span class="nav-text">命令行</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
