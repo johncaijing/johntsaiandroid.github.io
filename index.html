@@ -232,7 +232,7 @@
               
                 
                 <a class="post-title-link" href="/2016/07/19/Android如何从堆栈中还原ProGuard混淆后的代码/" itemprop="url">
-                  未命名
+                  Android:如何从堆栈中还原ProGuard混淆后的代码
                 </a>
               
             
@@ -242,7 +242,7 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2016-07-19T14:42:44+08:00" content="2016-07-19">
+            <time itemprop="dateCreated" datetime="2016-07-19T14:41:00+08:00" content="2016-07-19">
               2016-07-19
             </time>
           </span>
@@ -267,8 +267,7 @@
 
       
         
-          <p>title:Android:如何从堆栈中还原ProGuard混淆后的代码<br>date:2016-07-19 14:41:00</p>
-<h2 id="tags_3A_u7B97_u6CD5"><a href="#tags_3A_u7B97_u6CD5" class="headerlink" title="tags:算法"></a>tags:算法</h2><h1 id="Android_3A_u5982_u4F55_u4ECE_u5806_u6808_u4E2D_u8FD8_u539FProGuard_u6DF7_u6DC6_u540E_u7684_u4EE3_u7801"><a href="#Android_3A_u5982_u4F55_u4ECE_u5806_u6808_u4E2D_u8FD8_u539FProGuard_u6DF7_u6DC6_u540E_u7684_u4EE3_u7801" class="headerlink" title="Android:如何从堆栈中还原ProGuard混淆后的代码"></a>Android:如何从堆栈中还原ProGuard混淆后的代码</h1><p>本文翻译自<a href="http://simplyadvanced.net/blog/android-how-to-decode-proguards-obfuscated-code-from-stack-trace/">Android: How To Decode ProGuard’s Obfuscated Code From Stack Trace</a></p>
+          <h1 id="Android_3A_u5982_u4F55_u4ECE_u5806_u6808_u4E2D_u8FD8_u539FProGuard_u6DF7_u6DC6_u540E_u7684_u4EE3_u7801"><a href="#Android_3A_u5982_u4F55_u4ECE_u5806_u6808_u4E2D_u8FD8_u539FProGuard_u6DF7_u6DC6_u540E_u7684_u4EE3_u7801" class="headerlink" title="Android:如何从堆栈中还原ProGuard混淆后的代码"></a>Android:如何从堆栈中还原ProGuard混淆后的代码</h1><p>本文翻译自<a href="http://simplyadvanced.net/blog/android-how-to-decode-proguards-obfuscated-code-from-stack-trace/">Android: How To Decode ProGuard’s Obfuscated Code From Stack Trace</a></p>
 <p>本篇文章是写给那些在他们的应用中使用<a href="http://developer.android.com/tools/help/proguard.html">ProGuard</a>并且需要从堆栈信息中进行调试的Android开发者。这是一种非常简单就将混淆的错误信息转化为可读的方法。</p>
 <h3 id="u8FD8_u539F_u524D"><a href="#u8FD8_u539F_u524D" class="headerlink" title="还原前"></a>还原前</h3><p>以下是ProGuard混淆过的堆栈信息:</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Caused by: java<span class="class">.lang</span><span class="class">.NullPointerException</span></span><br><span class="line">at net<span class="class">.simplyadvanced</span><span class="class">.ltediscovery</span><span class="class">.be</span><span class="class">.u</span>(Unknown Source)</span><br><span class="line">at net<span class="class">.simplyadvanced</span><span class="class">.ltediscovery</span><span class="class">.at</span><span class="class">.v</span>(Unknown Source)</span><br><span class="line">at net<span class="class">.simplyadvanced</span><span class="class">.ltediscovery</span><span class="class">.at</span><span class="class">.d</span>(Unknown Source)</span><br><span class="line">at net<span class="class">.simplyadvanced</span><span class="class">.ltediscovery</span><span class="class">.av</span><span class="class">.onReceive</span>(Unknown Source)</span><br></pre></td></tr></table></figure>

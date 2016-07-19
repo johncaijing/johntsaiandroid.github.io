@@ -37,7 +37,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="算法," />
 
 
 
@@ -53,23 +53,23 @@
 
 
 
-<meta name="description" content="title:Android:如何从堆栈中还原ProGuard混淆后的代码date:2016-07-19 14:41:00
-tags:算法Android:如何从堆栈中还原ProGuard混淆后的代码本文翻译自Android: How To Decode ProGuard’s Obfuscated Code From Stack Trace
-本篇文章是写给那些在他们的应用中使用ProGuard并且需要">
+<meta name="description" content="Android:如何从堆栈中还原ProGuard混淆后的代码本文翻译自Android: How To Decode ProGuard’s Obfuscated Code From Stack Trace
+本篇文章是写给那些在他们的应用中使用ProGuard并且需要从堆栈信息中进行调试的Android开发者。这是一种非常简单就将混淆的错误信息转化为可读的方法。
+还原前以下是ProGuard混淆过的堆">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JohnTsai">
+<meta property="og:title" content="Android:如何从堆栈中还原ProGuard混淆后的代码">
 <meta property="og:url" content="http://yoursite.com/2016/07/19/Android如何从堆栈中还原ProGuard混淆后的代码/index.html">
 <meta property="og:site_name" content="JohnTsai">
-<meta property="og:description" content="title:Android:如何从堆栈中还原ProGuard混淆后的代码date:2016-07-19 14:41:00
-tags:算法Android:如何从堆栈中还原ProGuard混淆后的代码本文翻译自Android: How To Decode ProGuard’s Obfuscated Code From Stack Trace
-本篇文章是写给那些在他们的应用中使用ProGuard并且需要">
+<meta property="og:description" content="Android:如何从堆栈中还原ProGuard混淆后的代码本文翻译自Android: How To Decode ProGuard’s Obfuscated Code From Stack Trace
+本篇文章是写给那些在他们的应用中使用ProGuard并且需要从堆栈信息中进行调试的Android开发者。这是一种非常简单就将混淆的错误信息转化为可读的方法。
+还原前以下是ProGuard混淆过的堆">
 <meta property="og:image" content="http://7xr1jz.com1.z0.glb.clouddn.com/androidQQ20160719-0.png">
-<meta property="og:updated_time" content="2016-07-19T06:42:44.000Z">
+<meta property="og:updated_time" content="2016-07-19T06:46:56.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JohnTsai">
-<meta name="twitter:description" content="title:Android:如何从堆栈中还原ProGuard混淆后的代码date:2016-07-19 14:41:00
-tags:算法Android:如何从堆栈中还原ProGuard混淆后的代码本文翻译自Android: How To Decode ProGuard’s Obfuscated Code From Stack Trace
-本篇文章是写给那些在他们的应用中使用ProGuard并且需要">
+<meta name="twitter:title" content="Android:如何从堆栈中还原ProGuard混淆后的代码">
+<meta name="twitter:description" content="Android:如何从堆栈中还原ProGuard混淆后的代码本文翻译自Android: How To Decode ProGuard’s Obfuscated Code From Stack Trace
+本篇文章是写给那些在他们的应用中使用ProGuard并且需要从堆栈信息中进行调试的Android开发者。这是一种非常简单就将混淆的错误信息转化为可读的方法。
+还原前以下是ProGuard混淆过的堆">
 
 
 
@@ -81,7 +81,7 @@ tags:算法Android:如何从堆栈中还原ProGuard混淆后的代码本文翻�
   };
 </script>
 
-  <title>  | JohnTsai </title>
+  <title> Android:如何从堆栈中还原ProGuard混淆后的代码 | JohnTsai </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -230,7 +230,7 @@ tags:算法Android:如何从堆栈中还原ProGuard混淆后的代码本文翻�
             
             
               
-                
+                Android:如何从堆栈中还原ProGuard混淆后的代码
               
             
           </h1>
@@ -239,7 +239,7 @@ tags:算法Android:如何从堆栈中还原ProGuard混淆后的代码本文翻�
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2016-07-19T14:42:44+08:00" content="2016-07-19">
+            <time itemprop="dateCreated" datetime="2016-07-19T14:41:00+08:00" content="2016-07-19">
               2016-07-19
             </time>
           </span>
@@ -263,8 +263,7 @@ tags:算法Android:如何从堆栈中还原ProGuard混淆后的代码本文翻�
       
 
       
-        <span itemprop="articleBody"><p>title:Android:如何从堆栈中还原ProGuard混淆后的代码<br>date:2016-07-19 14:41:00</p>
-<h2 id="tags_3A_u7B97_u6CD5"><a href="#tags_3A_u7B97_u6CD5" class="headerlink" title="tags:算法"></a>tags:算法</h2><h1 id="Android_3A_u5982_u4F55_u4ECE_u5806_u6808_u4E2D_u8FD8_u539FProGuard_u6DF7_u6DC6_u540E_u7684_u4EE3_u7801"><a href="#Android_3A_u5982_u4F55_u4ECE_u5806_u6808_u4E2D_u8FD8_u539FProGuard_u6DF7_u6DC6_u540E_u7684_u4EE3_u7801" class="headerlink" title="Android:如何从堆栈中还原ProGuard混淆后的代码"></a>Android:如何从堆栈中还原ProGuard混淆后的代码</h1><p>本文翻译自<a href="http://simplyadvanced.net/blog/android-how-to-decode-proguards-obfuscated-code-from-stack-trace/" target="_blank" rel="external">Android: How To Decode ProGuard’s Obfuscated Code From Stack Trace</a></p>
+        <span itemprop="articleBody"><h1 id="Android_3A_u5982_u4F55_u4ECE_u5806_u6808_u4E2D_u8FD8_u539FProGuard_u6DF7_u6DC6_u540E_u7684_u4EE3_u7801"><a href="#Android_3A_u5982_u4F55_u4ECE_u5806_u6808_u4E2D_u8FD8_u539FProGuard_u6DF7_u6DC6_u540E_u7684_u4EE3_u7801" class="headerlink" title="Android:如何从堆栈中还原ProGuard混淆后的代码"></a>Android:如何从堆栈中还原ProGuard混淆后的代码</h1><p>本文翻译自<a href="http://simplyadvanced.net/blog/android-how-to-decode-proguards-obfuscated-code-from-stack-trace/" target="_blank" rel="external">Android: How To Decode ProGuard’s Obfuscated Code From Stack Trace</a></p>
 <p>本篇文章是写给那些在他们的应用中使用<a href="http://developer.android.com/tools/help/proguard.html" target="_blank" rel="external">ProGuard</a>并且需要从堆栈信息中进行调试的Android开发者。这是一种非常简单就将混淆的错误信息转化为可读的方法。</p>
 <h3 id="u8FD8_u539F_u524D"><a href="#u8FD8_u539F_u524D" class="headerlink" title="还原前"></a>还原前</h3><p>以下是ProGuard混淆过的堆栈信息:</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Caused by: java<span class="class">.lang</span><span class="class">.NullPointerException</span></span><br><span class="line">at net<span class="class">.simplyadvanced</span><span class="class">.ltediscovery</span><span class="class">.be</span><span class="class">.u</span>(Unknown Source)</span><br><span class="line">at net<span class="class">.simplyadvanced</span><span class="class">.ltediscovery</span><span class="class">.at</span><span class="class">.v</span>(Unknown Source)</span><br><span class="line">at net<span class="class">.simplyadvanced</span><span class="class">.ltediscovery</span><span class="class">.at</span><span class="class">.d</span>(Unknown Source)</span><br><span class="line">at net<span class="class">.simplyadvanced</span><span class="class">.ltediscovery</span><span class="class">.av</span><span class="class">.onReceive</span>(Unknown Source)</span><br></pre></td></tr></table></figure>
@@ -292,6 +291,12 @@ tags:算法Android:如何从堆栈中还原ProGuard混淆后的代码本文翻�
     </div>
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag">#算法</a>
+          
+        </div>
       
 
       
@@ -483,7 +488,7 @@ tags:算法Android:如何从堆栈中还原ProGuard混淆后的代码本文翻�
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tags_3A_u7B97_u6CD5"><span class="nav-number">1.</span> <span class="nav-text">tags:算法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Android_3A_u5982_u4F55_u4ECE_u5806_u6808_u4E2D_u8FD8_u539FProGuard_u6DF7_u6DC6_u540E_u7684_u4EE3_u7801"><span class="nav-number"></span> <span class="nav-text">Android:如何从堆栈中还原ProGuard混淆后的代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u8FD8_u539F_u524D"><span class="nav-number">0.1.</span> <span class="nav-text">还原前</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u8FD8_u539F_u540E"><span class="nav-number">0.2.</span> <span class="nav-text">还原后</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u5982_u4F55_u8FD8_u539F_u5806_u6808_u4FE1_u606F"><span class="nav-number">0.3.</span> <span class="nav-text">如何还原堆栈信息</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Android_3A_u5982_u4F55_u4ECE_u5806_u6808_u4E2D_u8FD8_u539FProGuard_u6DF7_u6DC6_u540E_u7684_u4EE3_u7801"><span class="nav-number">1.</span> <span class="nav-text">Android:如何从堆栈中还原ProGuard混淆后的代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u8FD8_u539F_u524D"><span class="nav-number">1.0.1.</span> <span class="nav-text">还原前</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u8FD8_u539F_u540E"><span class="nav-number">1.0.2.</span> <span class="nav-text">还原后</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u5982_u4F55_u8FD8_u539F_u5806_u6808_u4FE1_u606F"><span class="nav-number">1.0.3.</span> <span class="nav-text">如何还原堆栈信息</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
