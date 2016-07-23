@@ -1,0 +1,769 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="oieIepZ5VONXI9B7PTEDkYBDbwcx6_j2Z4wj8J4xBKU" />
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android,Java,RxJava," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="在第一部分，我讲解了RxJava的基本结构，也介绍了map()操作。然而，我能理解你仍旧不会选择使用Rxjava——你仍然还有很多东西没有学到。但是这个情况将很快得到改变。Rxjava一大部分的能力是因为其中的operators。
+让我们通过一个例子来向你们介绍更多的operators。
+初始假设我有一个这样的方法：
+12//返回一个基于文本查询网站链接的列表Observable&amp;lt;List&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="理解RxJava:(二)Operator，Operator">
+<meta property="og:url" content="http://yoursite.com/2016/07/23/理解RxJava(二)Operator，Operator/index.html">
+<meta property="og:site_name" content="JohnTsai">
+<meta property="og:description" content="在第一部分，我讲解了RxJava的基本结构，也介绍了map()操作。然而，我能理解你仍旧不会选择使用Rxjava——你仍然还有很多东西没有学到。但是这个情况将很快得到改变。Rxjava一大部分的能力是因为其中的operators。
+让我们通过一个例子来向你们介绍更多的operators。
+初始假设我有一个这样的方法：
+12//返回一个基于文本查询网站链接的列表Observable&amp;lt;List&amp;">
+<meta property="og:updated_time" content="2016-07-23T14:55:09.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="理解RxJava:(二)Operator，Operator">
+<meta name="twitter:description" content="在第一部分，我讲解了RxJava的基本结构，也介绍了map()操作。然而，我能理解你仍旧不会选择使用Rxjava——你仍然还有很多东西没有学到。但是这个情况将很快得到改变。Rxjava一大部分的能力是因为其中的operators。
+让我们通过一个例子来向你们介绍更多的operators。
+初始假设我有一个这样的方法：
+12//返回一个基于文本查询网站链接的列表Observable&amp;lt;List&amp;">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> 理解RxJava:(二)Operator，Operator | JohnTsai </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-78366202-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">JohnTsai</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">万物之中，希望最美，最美之物，永不凋零.</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-google">
+          <a href="http://www.itechzero.com/google-mirror-sites-collect.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-question-circle fa-fw"></i> <br />
+            
+            Google
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                理解RxJava:(二)Operator，Operator
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-07-23T22:14:00+08:00" content="2016-07-23">
+              2016-07-23
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>在第一部分，我讲解了RxJava的基本结构，也介绍了<code>map()</code>操作。然而，我能理解你仍旧不会选择使用Rxjava——你仍然还有很多东西没有学到。但是这个情况将很快得到改变。Rxjava一大部分的能力是因为其中的operators。</p>
+<p>让我们通过一个例子来向你们介绍更多的operators。</p>
+<h2 id="u521D_u59CB"><a href="#u521D_u59CB" class="headerlink" title="初始"></a>初始</h2><p>假设我有一个这样的方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//返回一个基于文本查询网站链接的列表</span></span><br><span class="line">Observable&lt;List&lt;String&gt;&gt; query(String text);</span><br></pre></td></tr></table></figure>
+<p>我想要构建一个搜索文本和显示结果的强健的系统。基于上篇文章我们学到的，以下是我们马上想到的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">query(<span class="string">"Hello, world!"</span>)</span><br><span class="line">    .subscribe(urls -&gt; &#123;</span><br><span class="line">        <span class="keyword">for</span> (String url : urls) &#123;</span><br><span class="line">            System.out.println(url);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+<p>这个答案让人非常不满意，因为我失去了转换数据流的能力。如果我想要修改每个URL，我只能在每个<code>Subscriber</code>里面修改。我们违背了使用<code>map()</code>操作的初衷。</p>
+<p>我可以为ulrs-&gt;urls创建一个<code>map()</code>,但是每个<code>map()</code>的内部都有一个for－each循环。哎哟。</p>
+<h2 id="u4E00_u7EBF_u5E0C_u671B"><a href="#u4E00_u7EBF_u5E0C_u671B" class="headerlink" title="一线希望"></a>一线希望</h2><p>有一个方法，<code>Observable.from()</code>，输入一些items，然后每次发出一个:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Observable.from(<span class="string">"url1"</span>, <span class="string">"url2"</span>, <span class="string">"url3"</span>)</span><br><span class="line">    .subscribe(url -&gt; System.out.println(url));</span><br></pre></td></tr></table></figure>
+<p>看起来有些帮助，让我们看看：</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">query(<span class="string">"Hello, world!"</span>)</span><br><span class="line">    .subscribe(urls<span class="function"> -&gt;</span> &#123;</span><br><span class="line">        Observable.<span class="keyword">from</span>(urls)</span><br><span class="line">            .subscribe(url<span class="function"> -&gt;</span> System.out.println(url));</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+<p>没有了for-each循环，但是代码显得很混乱。现在，变成了多个嵌套的subscriptions了。除了代码丑陋以及难以修改，也违背了RxJava的一些原则。</p>
+<h2 id="u66F4_u597D_u7684_u65B9_u6CD5"><a href="#u66F4_u597D_u7684_u65B9_u6CD5" class="headerlink" title="更好的方法"></a>更好的方法</h2><p>屏住你的呼吸，因为你见到了你的救世主：<code>flatMap()</code>。</p>
+<p><code>Observable.flatMap()</code>获取一个<code>Observable</code>的返回值，将值发给另一个取代它的<code>Observable</code>。如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">query(<span class="string">"Hello, world!"</span>)</span><br><span class="line">    .flatMap(<span class="keyword">new</span> Func1&lt;List&lt;String&gt;, Observable&lt;String&gt;&gt;() &#123;</span><br><span class="line">        <span class="annotation">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Observable&lt;String&gt; <span class="title">call</span><span class="params">(List&lt;String&gt; urls)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> Observable.from(urls);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    .subscribe(url -&gt; System.out.println(url));</span><br></pre></td></tr></table></figure>
+<p>我写成完整的方法是为了你能看到发生了什么，但是用 lambda表达式简写看起来很棒：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">query</span>("<span class="tag">Hello</span>, <span class="tag">world</span>!")</span><br><span class="line">    <span class="class">.flatMap</span>(<span class="tag">urls</span> <span class="tag">-</span>&gt; <span class="tag">Observable</span><span class="class">.from</span>(<span class="tag">urls</span>))</span><br><span class="line">    <span class="class">.subscribe</span>(<span class="tag">url</span> <span class="tag">-</span>&gt; <span class="tag">System</span><span class="class">.out</span><span class="class">.println</span>(<span class="tag">url</span>));</span><br></pre></td></tr></table></figure>
+<p><code>flatMap()</code>很怪，对吗？为什么返回另一个<code>Observable</code>？关键概念是新的<code>Observable</code>返回的就是<code>Subscriber</code>观察的。它不接收<code>List&lt;String&gt;</code>——它接收一系列的单独的<code>Strings</code>，作为<code>Observable.from()</code>返回的。</p>
+<h2 id="u6B64_u5916"><a href="#u6B64_u5916" class="headerlink" title="此外"></a>此外</h2><p>我强调这个观点几遍都不足够：<code>flatMap()</code>能返回任意想要的<code>Observable</code>。</p>
+<p>假设我又有一个这样的方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 返回网站的标题，若是404则返回null</span></span><br><span class="line"><span class="function">Observable&lt;String&gt; <span class="title">getTitle</span><span class="params">(String URL)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>原本是打印URL，现在我想要打印接收的每个网站的标题。但是有些问题：我的方法支队每次一个URL有效，而且它返回的不是String，它返回的是发出String的<code>Observable</code>。</p>
+<p>有了<code>flatMap()</code>，解决这个问题很简单。在把一系列的URL分开为单独的items后，我可以在<code>flatMap()</code>方法中对于每个URL使用<code>getTitle()</code>，在它到达<code>Subscriber</code>前。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">query(<span class="string">"Hello, world!"</span>)</span><br><span class="line">    .flatMap(urls -&gt; Observable.from(urls))</span><br><span class="line">    .flatMap(<span class="keyword">new</span> Func1&lt;String, Observable&lt;String&gt;&gt;() &#123;</span><br><span class="line">        <span class="annotation">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Observable&lt;String&gt; <span class="title">call</span><span class="params">(String url)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> getTitle(url);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    .subscribe(title -&gt; System.out.println(title));</span><br></pre></td></tr></table></figure>
+<p>同样，使用lambda简写：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">query(<span class="string">"Hello, world!"</span>)</span><br><span class="line">    .flatMap(urls -&gt; Observable.from(urls))</span><br><span class="line">    .flatMap(url -&gt; getTitle(url))</span><br><span class="line">    .subscribe(title -&gt; System.out.println(title));</span><br></pre></td></tr></table></figure>
+<p>很酷，对吧？我把几个返回<code>Observable</code>方法组合在一起。</p>
+<p>不仅仅于此，我还将两个API调用组合在一条方法链上了。你们知道维持所有的API调用同步，必须在数据展示前将它们的回调写在一起，是有多痛苦？我们不用在忍受嵌套回调了。所有的逻辑都包在简短的响应式调用中了。</p>
+<h2 id="u5927_u91CF_u7684Operators"><a href="#u5927_u91CF_u7684Operators" class="headerlink" title="大量的Operators"></a>大量的Operators</h2><p>到目前为止，我们仅仅学习了两种operators。有很多还没有学到。其他的operators能怎样改善我们的代码呢？</p>
+<p><code>getTitle()</code>在URL404的时候返回null。我们不想要输出<code>&quot;null&quot;</code>。以下代码显示我们可以过滤掉null：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">query(<span class="string">"Hello, world!"</span>)</span><br><span class="line">    .flatMap(urls -&gt; Observable.from(urls))</span><br><span class="line">    .flatMap(url -&gt; getTitle(url))</span><br><span class="line">    .filter(title -&gt; title != <span class="keyword">null</span>)</span><br><span class="line">    .subscribe(title -&gt; System.out.println(title));</span><br></pre></td></tr></table></figure>
+<p><code>filter()</code>方法发出它们接收到的同样的item，只在通过了boolean检查的情况下。</p>
+<p>现在我们只想要最多显示5个结果：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">query(<span class="string">"Hello, world!"</span>)</span><br><span class="line">    .flatMap(urls -&gt; Observable.from(urls))</span><br><span class="line">    .flatMap(url -&gt; getTitle(url))</span><br><span class="line">    .filter(title -&gt; title != <span class="keyword">null</span>)</span><br><span class="line">    .take(<span class="number">5</span>)</span><br><span class="line">    .subscribe(title -&gt; System.out.println(title));</span><br></pre></td></tr></table></figure>
+<p><code>take()</code>最多发出指定数量的item（如果少于5个标题，它会提前停止）。</p>
+<p>现在我们想要存储每个标题到磁盘上：</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">query(<span class="string">"Hello, world!"</span>)</span><br><span class="line">    <span class="built_in">.</span>flatMap(urls <span class="subst">-&gt; </span>Observable<span class="built_in">.</span>from(urls))</span><br><span class="line">    <span class="built_in">.</span>flatMap(url <span class="subst">-&gt; </span>getTitle(url))</span><br><span class="line">    <span class="built_in">.</span>filter(title <span class="subst">-&gt; </span>title != <span class="built_in">null</span>)</span><br><span class="line">    <span class="built_in">.</span><span class="keyword">take</span>(<span class="number">5</span>)</span><br><span class="line">    <span class="built_in">.</span>doOnNext(title <span class="subst">-&gt; </span>saveTitle(title))</span><br><span class="line">    <span class="built_in">.</span>subscribe(title <span class="subst">-&gt; </span>System<span class="built_in">.</span>out<span class="built_in">.</span>println(title));</span><br></pre></td></tr></table></figure>
+<p><code>doOnNext()</code>让我们可以在每次一个item被发出之前，添加额外的行为。</p>
+<p>看操作数据流多么简单。你可以继续对数据添加操作而不会弄糟任何事情。</p>
+<p><a href="https://github.com/ReactiveX/RxJava/wiki/Alphabetical-List-of-Observable-Operators" target="_blank" rel="external">RxJava有非常多的Operators</a>。这么多operators让我们被吓到，但是值得查阅一遍以知道哪个对我们有用。消化这些操作会花费点时间，但是我们能信手拈来的时候就能感受到Rxjava真正的强大。</p>
+<p>以上都是官方提供的，我们甚至可以自定义operators！这超出了本文的讨论范围。但是只要你想你就能做到。</p>
+<p>##So What?<br>如果你是个怀疑论者。你会问为什么要关注这些operators？</p>
+<h3 id="u5173_u952E_u70B93_Operators_u8BA9_u4F60_u80FD_u5BF9_u6570_u636E_u6D41_u505A_u4EFB_u4F55_u4E8B"><a href="#u5173_u952E_u70B93_Operators_u8BA9_u4F60_u80FD_u5BF9_u6570_u636E_u6D41_u505A_u4EFB_u4F55_u4E8B" class="headerlink" title="关键点3 Operators让你能对数据流做任何事"></a>关键点3 Operators让你能对数据流做任何事</h3><p>唯一的限制就是你自己。</p>
+<p>你可以处理复杂的逻辑，从使用简单的operators链开始。它将你的代码打破为可重组的零碎东西。这就是函数响应式编程。你用的越多，就越能改变你编程的思维。</p>
+<p>另外，想想我们的代码一转换消费起来变得多容易。最后的例子，我们调用了两次API，操作数据，然后存储。但是<code>Subscriber</code>并不知道这些。它想的仅仅是消费<code>Observable&lt;String&gt;</code>。封装让编程更简单。</p>
+<p>在第三部分，我们将继续了解RxJava的特性。比如错误处理和并发，和操作数据没有直接联系。</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+            <a href="/tags/Java/" rel="tag">#Java</a>
+          
+            <a href="/tags/RxJava/" rel="tag">#RxJava</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/22/理解RxJava(一)基础知识/" rel="next" title="理解RxJava:(一)基础知识">
+                <i class="fa fa-chevron-left"></i> 理解RxJava:(一)基础知识
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="https://avatars3.githubusercontent.com/u/8317477?v=3&s=460" alt="John Tsai" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">John Tsai</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">No pain No gain</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/johntsaiandroid" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> github
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/Kingtsai3" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> twitter
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/caicaicaibucai" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://stackoverflow.com/users/4562703/johnny-tsai" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> stackoverflow
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://medium.com/@JohnTsai" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> medium
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u521D_u59CB"><span class="nav-number">1.</span> <span class="nav-text">初始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4E00_u7EBF_u5E0C_u671B"><span class="nav-number">2.</span> <span class="nav-text">一线希望</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u66F4_u597D_u7684_u65B9_u6CD5"><span class="nav-number">3.</span> <span class="nav-text">更好的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u6B64_u5916"><span class="nav-number">4.</span> <span class="nav-text">此外</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5927_u91CF_u7684Operators"><span class="nav-number">5.</span> <span class="nav-text">大量的Operators</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u5173_u952E_u70B93_Operators_u8BA9_u4F60_u80FD_u5BF9_u6570_u636E_u6D41_u505A_u4EFB_u4F55_u4E8B"><span class="nav-number">5.1.</span> <span class="nav-text">关键点3 Operators让你能对数据流做任何事</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Tsai</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+    
+
+  
+
+
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>
