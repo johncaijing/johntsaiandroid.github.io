@@ -269,7 +269,7 @@
         
           <span itemprop="articleBody">
             
-              <p>在<a href="https://johntsai.xyz/2016/07/22/%E7%90%86%E8%A7%A3RxJava(%E4%B8%80" target="_blank" rel="external">第一部分</a>%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/)，我讲解了RxJava的基本结构，也介绍了<code>map()</code>操作。然而，我能理解你仍旧不会选择使用Rxjava——你仍然还有很多东西没有学到。但是这个情况将很快得到改变。Rxjava一大部分的能力是因为其中的operators。</p>
+              <p>在<a href="https://johntsai.xyz/2016/07/22/%E7%90%86%E8%A7%A3RxJava%28%E4%B8%80%29%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" target="_blank" rel="external">第一部分</a>，我讲解了RxJava的基本结构，也介绍了<code>map()</code>操作。然而，我能理解你仍旧不会选择使用Rxjava——你仍然还有很多东西没有学到。但是这个情况将很快得到改变。Rxjava一大部分的能力是因为其中的operators。</p>
 <p>让我们通过一个例子来向你们介绍更多的operators。</p>
 <h2 id="u521D_u59CB"><a href="#u521D_u59CB" class="headerlink" title="初始"></a>初始</h2><p>假设我有一个这样的方法：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//返回一个基于文本查询网站链接的列表</span></span><br><span class="line">Observable&lt;List&lt;String&gt;&gt; query(String text);</span><br></pre></td></tr></table></figure>
@@ -311,7 +311,7 @@
 <p>看操作数据流多么简单。你可以继续对数据添加操作而不会弄糟任何事情。</p>
 <p><a href="https://github.com/ReactiveX/RxJava/wiki/Alphabetical-List-of-Observable-Operators" target="_blank" rel="external">RxJava有非常多的Operators</a>。这么多operators让我们被吓到，但是值得查阅一遍以知道哪个对我们有用。消化这些操作会花费点时间，但是我们能信手拈来的时候就能感受到Rxjava真正的强大。</p>
 <p>以上都是官方提供的，我们甚至可以自定义operators！这超出了本文的讨论范围。但是只要你想你就能做到。</p>
-<p>##So What?<br>如果你是个怀疑论者。你会问为什么要关注这些operators？</p>
+<h2 id="So_What_3F"><a href="#So_What_3F" class="headerlink" title="So What?"></a>So What?</h2><p>如果你是个怀疑论者。你会问为什么要关注这些operators？</p>
 <h3 id="u5173_u952E_u70B93_Operators_u8BA9_u4F60_u80FD_u5BF9_u6570_u636E_u6D41_u505A_u4EFB_u4F55_u4E8B"><a href="#u5173_u952E_u70B93_Operators_u8BA9_u4F60_u80FD_u5BF9_u6570_u636E_u6D41_u505A_u4EFB_u4F55_u4E8B" class="headerlink" title="关键点3 Operators让你能对数据流做任何事"></a>关键点3 Operators让你能对数据流做任何事</h3><p>唯一的限制就是你自己。</p>
 <p>你可以处理复杂的逻辑，从使用简单的operators链开始。它将你的代码打破为可重组的零碎东西。这就是函数响应式编程。你用的越多，就越能改变你编程的思维。</p>
 <p>另外，想想我们的代码一转换消费起来变得多容易。最后的例子，我们调用了两次API，操作数据，然后存储。但是<code>Subscriber</code>并不知道这些。它想的仅仅是消费<code>Observable&lt;String&gt;</code>。封装让编程更简单。</p>
