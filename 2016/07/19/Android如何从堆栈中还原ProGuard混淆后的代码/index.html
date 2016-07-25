@@ -1,177 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>Android:如何从堆栈中还原ProGuard混淆后的代码 | JohnTsai</title>
-  <meta name="viewport" content="width=device-width">
-  <meta name="description" content="本文翻译自Android: How To Decode ProGuard’s Obfuscated Code From Stack Trace
-本篇文章是写给那些在他们的应用中使用ProGuard并且需要从堆栈信息中进行调试的Android开发者。这是一种非常简单就将混淆的错误信息转化为可读的方法。
-还原前以下是ProGuard混淆过的堆栈信息:
-12345Caused by: java.lang">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Android:如何从堆栈中还原ProGuard混淆后的代码">
-<meta property="og:url" content="http://yoursite.com/2016/07/19/Android如何从堆栈中还原ProGuard混淆后的代码/index.html">
-<meta property="og:site_name" content="JohnTsai">
-<meta property="og:description" content="本文翻译自Android: How To Decode ProGuard’s Obfuscated Code From Stack Trace
-本篇文章是写给那些在他们的应用中使用ProGuard并且需要从堆栈信息中进行调试的Android开发者。这是一种非常简单就将混淆的错误信息转化为可读的方法。
-还原前以下是ProGuard混淆过的堆栈信息:
-12345Caused by: java.lang">
-<meta property="og:image" content="http://7xr1jz.com1.z0.glb.clouddn.com/androidQQ20160719-0.png">
-<meta property="og:updated_time" content="2016-07-19T06:53:49.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android:如何从堆栈中还原ProGuard混淆后的代码">
-<meta name="twitter:description" content="本文翻译自Android: How To Decode ProGuard’s Obfuscated Code From Stack Trace
-本篇文章是写给那些在他们的应用中使用ProGuard并且需要从堆栈信息中进行调试的Android开发者。这是一种非常简单就将混淆的错误信息转化为可读的方法。
-还原前以下是ProGuard混淆过的堆栈信息:
-12345Caused by: java.lang">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  
-</head>
-<body>
-  <div id="container">
-    <div class="mobile-nav-panel">
-	<i class="icon-reorder icon-large"></i>
-</div>
-<header id="header">
-	<h1 class="blog-title">
-		<a href="/">JohnTsai</a>
-	</h1>
-	<nav class="nav">
-		<ul>
-			<li><a href="/">home</a></li><li><a href="/archives">archives</a></li><li><a href="/about">about</a></li>
-			<li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
-			
-		</ul>
-	</nav>
-	<div id="search-form-wrap">
-		<form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
-	</div>
-</header>
-    <div id="main">
-      <article id="post-Android如何从堆栈中还原ProGuard混淆后的代码" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2016/07/19/Android如何从堆栈中还原ProGuard混淆后的代码/" class="article-date">
-  <time datetime="2016-07-19T06:41:00.000Z" itemprop="datePublished">2016-07-19</time>
-</a>
-		</span>
-		<span class="meta-elements author">John Tsai</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
-  
-    <h1 class="article-title entry-title" itemprop="name">
-      Android:如何从堆栈中还原ProGuard混淆后的代码
-    </h1>
-  
+extends partial/layout
 
-	</header>
-	<div class="entry-content">
-		
-    	<p>本文翻译自<a href="http://simplyadvanced.net/blog/android-how-to-decode-proguards-obfuscated-code-from-stack-trace/" target="_blank" rel="external">Android: How To Decode ProGuard’s Obfuscated Code From Stack Trace</a></p>
-<p>本篇文章是写给那些在他们的应用中使用<a href="http://developer.android.com/tools/help/proguard.html" target="_blank" rel="external">ProGuard</a>并且需要从堆栈信息中进行调试的Android开发者。这是一种非常简单就将混淆的错误信息转化为可读的方法。</p>
-<h3 id="u8FD8_u539F_u524D"><a href="#u8FD8_u539F_u524D" class="headerlink" title="还原前"></a>还原前</h3><p>以下是ProGuard混淆过的堆栈信息:</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Caused by: java<span class="class">.lang</span><span class="class">.NullPointerException</span></span><br><span class="line">at net<span class="class">.simplyadvanced</span><span class="class">.ltediscovery</span><span class="class">.be</span><span class="class">.u</span>(Unknown Source)</span><br><span class="line">at net<span class="class">.simplyadvanced</span><span class="class">.ltediscovery</span><span class="class">.at</span><span class="class">.v</span>(Unknown Source)</span><br><span class="line">at net<span class="class">.simplyadvanced</span><span class="class">.ltediscovery</span><span class="class">.at</span><span class="class">.d</span>(Unknown Source)</span><br><span class="line">at net<span class="class">.simplyadvanced</span><span class="class">.ltediscovery</span><span class="class">.av</span><span class="class">.onReceive</span>(Unknown Source)</span><br></pre></td></tr></table></figure>
-<a id="more"></a> 
-<h3 id="u8FD8_u539F_u540E"><a href="#u8FD8_u539F_u540E" class="headerlink" title="还原后"></a>还原后</h3><p>只要在命令行写一行命令，混淆都将会被移除，如下所示：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Caused by: java<span class="class">.lang</span><span class="class">.NullPointerException</span></span><br><span class="line">at net<span class="class">.simplyadvanced</span><span class="class">.ltediscovery</span><span class="class">.UtilTelephony</span><span class="class">.boolean</span> <span class="function"><span class="title">is800MhzNetwork</span><span class="params">()</span><span class="params">(Unknown Source)</span></span></span><br><span class="line">at net<span class="class">.simplyadvanced</span><span class="class">.ltediscovery</span><span class="class">.ServiceDetectLte</span><span class="class">.void</span> <span class="function"><span class="title">checkAndAlertUserIf800MhzConnected</span><span class="params">()</span><span class="params">(Unknown Source)</span></span></span><br><span class="line">at net<span class="class">.simplyadvanced</span><span class="class">.ltediscovery</span><span class="class">.ServiceDetectLte</span><span class="class">.void</span> <span class="function"><span class="title">startLocalBroadcastReceiver</span><span class="params">()</span><span class="params">(Unknown Source)</span></span></span><br><span class="line">at net<span class="class">.simplyadvanced</span><span class="class">.ltediscovery</span><span class="class">.ServiceDetectLte</span>$<span class="number">2</span><span class="class">.void</span> <span class="function"><span class="title">onReceive</span><span class="params">(android.content.Context,android.content.Intent)</span><span class="params">(Unknown Source)</span></span></span><br></pre></td></tr></table></figure>
-<h3 id="u5982_u4F55_u8FD8_u539F_u5806_u6808_u4FE1_u606F"><a href="#u5982_u4F55_u8FD8_u539F_u5806_u6808_u4FE1_u606F" class="headerlink" title="如何还原堆栈信息"></a>如何还原堆栈信息</h3><p>可以选择命令行或者GUI</p>
-<h4 id="GUI"><a href="#GUI" class="headerlink" title="GUI"></a>GUI</h4><ul>
-<li>1.打开<code>/tools/proguard/bin/proguardgui.bat</code></li>
-<li>2.选择左边栏的<code>ReTrace</code>选项</li>
-<li>3.添加你的mapping文件和混淆过的堆栈信息</li>
-<li>4.点击<code>ReTrace!</code></li>
-</ul>
-<p>如下图所示(译者注)<br><img src="http://7xr1jz.com1.z0.glb.clouddn.com/androidQQ20160719-0.png" alt=""></p>
-<h4 id="u547D_u4EE4_u884C"><a href="#u547D_u4EE4_u884C" class="headerlink" title="命令行"></a>命令行</h4><ul>
-<li>1.需要你的ProGuard的mapping文件和你想要还原的堆栈信息（如stacktrace.txt）</li>
-<li>2.最简单的方法就是将这些文件拷贝到<code>/tools/proguard/bin/</code>目录</li>
-<li>3.运行以下命令</li>
-</ul>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Windows</span></span><br><span class="line">retrace<span class="class">.bat</span> -verbose mapping<span class="class">.txt</span> stacktrace<span class="class">.txt</span> &gt; out<span class="class">.txt</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//Mac/Linux</span></span><br><span class="line">retrace<span class="class">.sh</span> -verbose mapping<span class="class">.txt</span> stacktrace<span class="class">.txt</span> &gt; out.txt</span><br></pre></td></tr></table></figure>
+block site_title
+    != page.title + " · " + config.title
 
-    
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-			</span>
-			<span class="tags">
-				
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+block description
+    - var desc = page.desc || page.title + ' - ' + config.author;
+    meta(name="description", content=desc)
 
-			</span>
-		</div>
-	</footer>
-	
-    
-<nav id="article-nav">
-  
-    <a href="/2016/07/21/Android问题小结/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Android问题小结
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2016/06/22/深入浅出经典面试题之——反转字符串/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">
-        
-          深入浅出经典面试题之——反转字符串
-        
-      </div>
-    </a>
-  
-</nav>
+block container
+    include mixins/post
+    +post(page)
 
-  
-</article>
+block pagination
+    include mixins/paginator
+    +post()
+    include partial/comment
 
-
-
-
-    </div>
-    <div class="mb-search">
-  <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="Search">
-    <input type="hidden" name="q" value="site:yoursite.com">
-  </form>
-</div>
-<footer id="footer">
-	<h1 class="footer-blog-title">
-		<a href="/">JohnTsai</a>
-	</h1>
-	<span class="copyright">
-		&copy; 2016 John Tsai<br>
-		Modify from <a href="http://sanographix.github.io/tumblr/apollo/" target="_blank">Apollo</a> theme, designed by <a href="http://www.sanographix.net/" target="_blank">SANOGRAPHIX.NET</a><br>
-		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-	</span>
-</footer>
-    
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js" type="text/javascript"></script>
-  </div>
-</body>
-</html>
+block copyright
+    include partial/copyright
