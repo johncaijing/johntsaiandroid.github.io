@@ -1,59 +1,11 @@
-<!doctype html>
-<html class="theme-next   use-motion ">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-  <meta name="google-site-verification" content="oieIepZ5VONXI9B7PTEDkYBDbwcx6_j2Z4wj8J4xBKU" />
-
-
-
-
-
-
-
-
-
-
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
-
-
-
-
-  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-
-
-
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Android,Java,RxJava," />
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
-
-
-
-
-
-
-<meta name="description" content="本文翻译自Grokking RxJava, Part 1: The Basics,著作权归原作者danlew所有。译文由JohnTsai翻译。转载请注明出处，并保留此段声明。
+  <meta charset="utf-8">
+  
+  <title>理解RxJava:(一)基础知识 | JohnTsai</title>
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="本文翻译自Grokking RxJava, Part 1: The Basics,著作权归原作者danlew所有。译文由JohnTsai翻译。转载请注明出处，并保留此段声明。
 RxJava这些天成为了Android开发者关注的新热点。唯一的问题是它在你刚接触时难以理解。当你习惯了命令式编程，函数响应式编程就变得难以理解。但是一旦你理解了它，它就变得很棒了。
 我在这试着给你们带来不一样的RxJava">
 <meta property="og:type" content="article">
@@ -63,206 +15,68 @@ RxJava这些天成为了Android开发者关注的新热点。唯一的问题是�
 <meta property="og:description" content="本文翻译自Grokking RxJava, Part 1: The Basics,著作权归原作者danlew所有。译文由JohnTsai翻译。转载请注明出处，并保留此段声明。
 RxJava这些天成为了Android开发者关注的新热点。唯一的问题是它在你刚接触时难以理解。当你习惯了命令式编程，函数响应式编程就变得难以理解。但是一旦你理解了它，它就变得很棒了。
 我在这试着给你们带来不一样的RxJava">
-<meta property="og:updated_time" content="2016-07-23T08:21:53.000Z">
+<meta property="og:updated_time" content="2016-07-25T01:38:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="理解RxJava:(一)基础知识">
 <meta name="twitter:description" content="本文翻译自Grokking RxJava, Part 1: The Basics,著作权归原作者danlew所有。译文由JohnTsai翻译。转载请注明出处，并保留此段声明。
 RxJava这些天成为了Android开发者关注的新热点。唯一的问题是它在你刚接触时难以理解。当你习惯了命令式编程，函数响应式编程就变得难以理解。但是一旦你理解了它，它就变得很棒了。
 我在这试着给你们带来不一样的RxJava">
-
-
-
-<script type="text/javascript" id="hexo.configuration">
-  var CONFIG = {
-    scheme: 'Mist',
-    sidebar: 'post',
-    motion: true
-  };
-</script>
-
-  <title> 理解RxJava:(一)基础知识 | JohnTsai </title>
+  
+    <link rel="alternative" href="/atom.xml" title="JohnTsai" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
 </head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
-<![endif]-->
-  
-
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-78366202-1', 'auto');
-  ga('send', 'pageview');
-</script>
-
-
-
-
-
-  <div class="container one-column page-post-detail">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
-
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">JohnTsai</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-  <p class="site-subtitle">万物之中，希望最美，最美之物，永不凋零.</p>
+<body>
+  <div id="container">
+    <div class="mobile-nav-panel">
+	<i class="icon-reorder icon-large"></i>
 </div>
-
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
-</div>
-
-<nav class="site-nav">
+<header id="header">
+	<h1 class="blog-title">
+		<a href="/">JohnTsai</a>
+	</h1>
+	<nav class="nav">
+		<ul>
+			<li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li>
+			<li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
+			<li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
+		</ul>
+	</nav>
+	<div id="search-form-wrap">
+		<form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+	</div>
+</header>
+    <div id="main">
+      <article id="post-理解RxJava(一)基础知识" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2016/07/22/理解RxJava(一)基础知识/" class="article-date">
+  <time datetime="2016-07-22T08:14:00.000Z" itemprop="datePublished">2016-07-22</time>
+</a>
+		</span>
+		<span class="meta-elements author">John Tsai</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 class="article-title entry-title" itemprop="name">
+      理解RxJava:(一)基础知识
+    </h1>
   
 
-  
-    <ul id="menu" class="menu ">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-google">
-          <a href="http://www.itechzero.com/google-mirror-sites-collect.html" rel="section">
-            
-              <i class="menu-item-icon fa fa-question-circle fa-fw"></i> <br />
-            
-            Google
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-
-      
-      
-    </ul>
-  
-
-  
-</nav>
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div id="content" class="content">
-          
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                理解RxJava:(一)基础知识
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-07-22T16:14:00+08:00" content="2016-07-22">
-              2016-07-22
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        <span itemprop="articleBody"><p>本文翻译自<a href="http://blog.danlew.net/2014/09/15/grokking-rxjava-part-1/" target="_blank" rel="external">Grokking RxJava, Part 1: The Basics</a>,著作权归原作者<a href="https://twitter.com/danlew42" target="_blank" rel="external">danlew</a>所有。译文由<a href="https://www.github.com/JohnTsaiAndroid" target="_blank" rel="external">JohnTsai</a>翻译。转载请注明出处，并保留此段声明。</p>
+	</header>
+	<div class="entry-content">
+		
+    	<p>本文翻译自<a href="http://blog.danlew.net/2014/09/15/grokking-rxjava-part-1/" target="_blank" rel="external">Grokking RxJava, Part 1: The Basics</a>,著作权归原作者<a href="https://twitter.com/danlew42" target="_blank" rel="external">danlew</a>所有。译文由<a href="https://www.github.com/JohnTsaiAndroid" target="_blank" rel="external">JohnTsai</a>翻译。转载请注明出处，并保留此段声明。</p>
 <p><a href="https://github.com/ReactiveX/RxJava" target="_blank" rel="external">RxJava</a>这些天成为了Android开发者关注的新热点。唯一的问题是它在你刚接触时难以理解。当你习惯了命令式编程，函数响应式编程就变得难以理解。但是一旦你理解了它，它就变得很棒了。</p>
 <p>我在这试着给你们带来不一样的RxJava。这一系列四篇文章的目标是带你们入门。我不会也不能讲解所有的东西。我只是想让你们对RxJava以及它的工作原理感兴趣。</p>
 <h2 id="u57FA_u7840_u77E5_u8BC6"><a href="#u57FA_u7840_u77E5_u8BC6" class="headerlink" title="基础知识"></a>基础知识</h2><p>响应式代码的基本构成部分是<code>Observables</code>和<code>Subscribers</code>(<em>译者注：技术名词很难找到合适的中文翻译，所以维持原文不被翻译</em>)。<code>Observable</code>发出items，<code>Subscriber</code>消费这些items。</p>
@@ -290,7 +104,7 @@ RxJava这些天成为了Android开发者关注的新热点。唯一的问题是�
 <p>最后，用Java 8的lambdas表达式来去掉丑陋的<code>Action1</code>代码。</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">Observable</span><span class="class">.just</span>("<span class="tag">Hello</span>, <span class="tag">world</span>!")</span><br><span class="line">    <span class="class">.subscribe</span>(<span class="tag">s</span> <span class="tag">-</span>&gt; <span class="tag">System</span><span class="class">.out</span><span class="class">.println</span>(<span class="tag">s</span>));</span><br></pre></td></tr></table></figure>
 <p>如果你在Android中使用（迄今为止不能使用Java8）(<em>译者注：原文作者写这篇文章的时候(2014年)Java8在Android中开发不能使用，在译者翻译这篇文章的时候（2016年），已经能使用部分特性了</em>)，我推荐使用<a href="https://github.com/evant/gradle-retrolambda" target="_blank" rel="external">retrolambda</a>,它将大幅降低代码的啰嗦程度。</p>
-<p>##变换<br>让我们把事情变得更有趣。</p>
+<h2 id="u53D8_u6362"><a href="#u53D8_u6362" class="headerlink" title="变换"></a>变换</h2><p>让我们把事情变得更有趣。</p>
 <p>假设我想要在输出的<code>&quot;Hello,world!&quot;</code>语句中加上我的签名。一种可能（的实现方式）是改变<code>Observable</code>:</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">Observable</span><span class="class">.just</span>("<span class="tag">Hello</span>, <span class="tag">world</span>! <span class="tag">-Dan</span>")</span><br><span class="line">    <span class="class">.subscribe</span>(<span class="tag">s</span> <span class="tag">-</span>&gt; <span class="tag">System</span><span class="class">.out</span><span class="class">.println</span>(<span class="tag">s</span>));</span><br></pre></td></tr></table></figure>
 <p>如果你能够控制你的<code>Observable</code>,这有效。但是不能保证以后都是这种情况。如果你使用的是别人的库呢？<br>另一种可能的问题是:如果我在多个地方使用我的<code>Observable</code>，但仅仅是某些情况下想要加上签名呢?</p>
@@ -319,462 +133,79 @@ RxJava这些天成为了Android开发者关注的新热点。唯一的问题是�
 <p>RxJava是个能够处理任何问题的通用框架。</p>
 <h3 id="u5173_u952E_u70B92_3AObservable_u548CSubscriber_u72EC_u7ACB_u4E8E_u5728_u5B83_u4EEC_u4E4B_u95F4_u7684_u8F6C_u6362_u6B65_u9AA4"><a href="#u5173_u952E_u70B92_3AObservable_u548CSubscriber_u72EC_u7ACB_u4E8E_u5728_u5B83_u4EEC_u4E4B_u95F4_u7684_u8F6C_u6362_u6B65_u9AA4" class="headerlink" title="关键点2:<code>Observable</code>和<code>Subscriber</code>独立于在它们之间的转换步骤"></a>关键点2:<code>Observable</code>和<code>Subscriber</code>独立于在它们之间的转换步骤</h3><p>我可以调用任意次的<code>map</code>操作，在最初的源<code>Observable</code>和它最终的<code>Subscriber</code>之间。RxJava高度组件化：易于操作数据。只要操作于正确的输入输出数据，我可以制造一条无止尽的方法链。</p>
 <p>综合以上两点，我们可以看到RxJava的巨大潜力。虽然此时我们仅仅有一个<code>map()</code>操作,这严重地限制了我们的能力。在第二部分，我们将深入研究更多RxJava的操作。</p>
-</span>
-      
-    </div>
 
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/Android/" rel="tag">#Android</a>
-          
-            <a href="/tags/Java/" rel="tag">#Java</a>
-          
-            <a href="/tags/RxJava/" rel="tag">#RxJava</a>
-          
-        </div>
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2016/07/21/Android问题小结/" rel="next" title="Android问题小结">
-                <i class="fa fa-chevron-left"></i> Android问题小结
-              </a>
-            
-          </div>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/07/23/理解RxJava(二)Operator，Operator/" rel="prev" title="理解RxJava:(二)Operator，Operator">
-                理解RxJava:(二)Operator，Operator <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </article>
-
-
-
-    <div class="post-spread">
-      
-        <!-- JiaThis Button BEGIN -->
-<div class="jiathis_style">
-  <a class="jiathis_button_tsina"></a>
-  <a class="jiathis_button_tqq"></a>
-  <a class="jiathis_button_weixin"></a>
-  <a class="jiathis_button_cqq"></a>
-  <a class="jiathis_button_douban"></a>
-  <a class="jiathis_button_renren"></a>
-  <a class="jiathis_button_qzone"></a>
-  <a class="jiathis_button_kaixin001"></a>
-  <a class="jiathis_button_copy"></a>
-  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
-  <a class="jiathis_counter_style"></a>
-</div>
-<script type="text/javascript" >
-  var jiathis_config={
-    hideMore:false
-  }
-</script>
-<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
-<!-- JiaThis Button END -->
-
-      
-    </div>
-  </div>
-
-
-        </div>
-
-        
-
-
-        
-  <div class="comments" id="comments">
     
-  </div>
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+			</span>
+			<span class="tags">
+				
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RxJava/">RxJava</a></li></ul>
 
-
+			</span>
+		</div>
+	</footer>
+	
+    
+<nav id="article-nav">
+  
+    <a href="/2016/07/23/理解RxJava(二)Operator，Operator/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          理解RxJava:(二)Operator，Operator
+        
       </div>
-
-      
-        
+    </a>
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="https://avatars3.githubusercontent.com/u/8317477?v=3&s=460" alt="John Tsai" itemprop="image"/>
-          <p class="site-author-name" itemprop="name">John Tsai</p>
-        </div>
-        <p class="site-description motion-element" itemprop="description">No pain No gain</p>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">9</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
-
-          <div class="site-state-item site-state-categories">
-            
-              <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">分类</span>
-              
-          </div>
-
-          <div class="site-state-item site-state-tags">
-            <a href="/tags">
-              <span class="site-state-item-count">5</span>
-              <span class="site-state-item-name">标签</span>
-              </a>
-          </div>
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/johntsaiandroid" target="_blank">
-                  
-                    <i class="fa fa-globe"></i> github
-                  
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://twitter.com/Kingtsai3" target="_blank">
-                  
-                    <i class="fa fa-globe"></i> twitter
-                  
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://weibo.com/caicaicaibucai" target="_blank">
-                  
-                    <i class="fa fa-globe"></i> weibo
-                  
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://stackoverflow.com/users/4562703/johnny-tsai" target="_blank">
-                  
-                    <i class="fa fa-globe"></i> stackoverflow
-                  
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://medium.com/@JohnTsai" target="_blank">
-                  
-                    <i class="fa fa-globe"></i> medium
-                  
-                </a>
-              </span>
-            
-          
-        </div>
-
-        
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-      </section>
-
-      
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc-indicator-top post-toc-indicator">
-            <i class="fa fa-angle-double-up"></i>
-          </div>
-          <div class="post-toc">
-            
-              
-            
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u57FA_u7840_u77E5_u8BC6"><span class="nav-number">1.</span> <span class="nav-text">基础知识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hello_World"><span class="nav-number">2.</span> <span class="nav-text">Hello World</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u66F4_u7B80_u6D01_u7684_u4EE3_u7801"><span class="nav-number">3.</span> <span class="nav-text">更简洁的代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Operators_u4ECB_u7ECD"><span class="nav-number">4.</span> <span class="nav-text">Operators介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u6DF1_u5165map_28_29"><span class="nav-number">5.</span> <span class="nav-text">深入map()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#So_What_uFF1F"><span class="nav-number">6.</span> <span class="nav-text">So What？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u5173_u952E_u70B91_3AObservable_u548CSubscriber_u80FD_u505A_u4EFB_u4F55_u4E8B_u60C5"><span class="nav-number">6.1.</span> <span class="nav-text">关键点1:Observable和Subscriber能做任何事情</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u5173_u952E_u70B92_3AObservable_u548CSubscriber_u72EC_u7ACB_u4E8E_u5728_u5B83_u4EEC_u4E4B_u95F4_u7684_u8F6C_u6362_u6B65_u9AA4"><span class="nav-number">6.2.</span> <span class="nav-text">关键点2:Observable和Subscriber独立于在它们之间的转换步骤</span></a></li></ol></li></ol></div>
-            
-          </div>
-          <div class="post-toc-indicator-bottom post-toc-indicator">
-            <i class="fa fa-angle-double-down"></i>
-          </div>
-        </section>
-      
-
-    </div>
-  </aside>
-
-
-      
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
   
-  &copy; 
-  <span itemprop="copyrightYear">2016</span>
-  <span class="with-love">
-    <i class="icon-next-heart fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">John Tsai</span>
-</div>
-
-<div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
-  </a>
-</div>
-
-
-
+    <a href="/2016/07/21/Android问题小结/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">
+        
+          Android问题小结
+        
       </div>
-    </footer>
+    </a>
+  
+</nav>
 
-    <div class="back-to-top"></div>
+  
+</article>
+
+
+
+
+    </div>
+    <div class="mb-search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+<footer id="footer">
+	<h1 class="footer-blog-title">
+		<a href="/">JohnTsai</a>
+	</h1>
+	<span class="copyright">
+		&copy; 2016 John Tsai<br>
+		Modify from <a href="http://sanographix.github.io/tumblr/apollo/" target="_blank">Apollo</a> theme, designed by <a href="http://www.sanographix.net/" target="_blank">SANOGRAPHIX.NET</a><br>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+	</span>
+</footer>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
   </div>
-
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  
-
-  
-    
-    
-
-  
-
-
-  
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
-
-
-  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
-
-
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  
-<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
-
-
-<script type="text/javascript" id="sidebar.toc.highlight">
-  $(document).ready(function () {
-    var tocSelector = '.post-toc';
-    var $tocSelector = $(tocSelector);
-    var activeCurrentSelector = '.active-current';
-
-    $tocSelector
-      .on('activate.bs.scrollspy', function () {
-        var $currentActiveElement = $(tocSelector + ' .active').last();
-
-        removeCurrentActiveClass();
-        $currentActiveElement.addClass('active-current');
-
-        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
-      })
-      .on('clear.bs.scrollspy', function () {
-        removeCurrentActiveClass();
-      });
-
-    function removeCurrentActiveClass () {
-      $(tocSelector + ' ' + activeCurrentSelector)
-        .removeClass(activeCurrentSelector.substring(1));
-    }
-
-    function processTOC () {
-      getTOCMaxHeight();
-      toggleTOCOverflowIndicators();
-    }
-
-    function getTOCMaxHeight () {
-      var height = $('.sidebar').height() -
-                   $tocSelector.position().top -
-                   $('.post-toc-indicator-bottom').height();
-
-      $tocSelector.css('height', height);
-
-      return height;
-    }
-
-    function toggleTOCOverflowIndicators () {
-      tocOverflowIndicator(
-        '.post-toc-indicator-top',
-        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
-      );
-
-      tocOverflowIndicator(
-        '.post-toc-indicator-bottom',
-        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
-      )
-    }
-
-    $(document).on('sidebar.motion.complete', function () {
-      processTOC();
-    });
-
-    $('body').scrollspy({ target: tocSelector });
-    $(window).on('resize', function () {
-      if ( $('.sidebar').hasClass('sidebar-active') ) {
-        processTOC();
-      }
-    });
-
-    onScroll($tocSelector);
-
-    function onScroll (element) {
-      element.on('mousewheel DOMMouseScroll', function (event) {
-          var oe = event.originalEvent;
-          var delta = oe.wheelDelta || -oe.detail;
-
-          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
-          event.preventDefault();
-
-          toggleTOCOverflowIndicators();
-      });
-    }
-
-    function tocOverflowIndicator (indicator, action) {
-      var $indicator = $(indicator);
-      var opacity = action === 'show' ? 1 : 0;
-      $indicator.velocity ?
-        $indicator.velocity('stop').velocity({
-          opacity: opacity
-        }, { duration: 100 }) :
-        $indicator.stop().animate({
-          opacity: opacity
-        }, 100);
-    }
-
-  });
-</script>
-
-<script type="text/javascript" id="sidebar.nav">
-  $(document).ready(function () {
-    var html = $('html');
-    var TAB_ANIMATE_DURATION = 200;
-    var hasVelocity = $.isFunction(html.velocity);
-
-    $('.sidebar-nav li').on('click', function () {
-      var item = $(this);
-      var activeTabClassName = 'sidebar-nav-active';
-      var activePanelClassName = 'sidebar-panel-active';
-      if (item.hasClass(activeTabClassName)) {
-        return;
-      }
-
-      var currentTarget = $('.' + activePanelClassName);
-      var target = $('.' + item.data('target'));
-
-      hasVelocity ?
-        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
-          target
-            .velocity('stop')
-            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
-            .addClass(activePanelClassName);
-        }) :
-        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
-          currentTarget.hide();
-          target
-            .stop()
-            .css({'opacity': 0, 'display': 'block'})
-            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
-              currentTarget.removeClass(activePanelClassName);
-              target.addClass(activePanelClassName);
-            });
-        });
-
-      item.siblings().removeClass(activeTabClassName);
-      item.addClass(activeTabClassName);
-    });
-
-    $('.post-toc a').on('click', function (e) {
-      e.preventDefault();
-      var targetSelector = escapeSelector(this.getAttribute('href'));
-      var offset = $(targetSelector).offset().top;
-      hasVelocity ?
-        html.velocity('stop').velocity('scroll', {
-          offset: offset  + 'px',
-          mobileHA: false
-        }) :
-        $('html, body').stop().animate({
-          scrollTop: offset
-        }, 500);
-    });
-
-    // Expand sidebar on post detail page by default, when post has a toc.
-    motionMiddleWares.sidebar = function () {
-      var $tocContent = $('.post-toc-content');
-      if (CONFIG.sidebar === 'post') {
-        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
-          displaySidebar();
-        }
-      }
-    };
-  });
-</script>
-
-
-
-  <script type="text/javascript" src="/js/bootstrap.js"></script>
-
-  
-  
-
-  
-  
-
 </body>
 </html>
