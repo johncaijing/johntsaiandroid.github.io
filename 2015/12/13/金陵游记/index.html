@@ -1,20 +1,17 @@
-extends partial/layout
-
-block site_title
-    != page.title + " · " + config.title
-
-block description
-    - var desc = page.desc || page.title + ' - ' + config.author;
-    meta(name="description", content=desc)
-
-block container
-    include mixins/post
-    +post(page)
-
-block pagination
-    include mixins/paginator
-    +post()
-    include partial/comment
-
-block copyright
-    include partial/copyright
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 金陵游记 · JohnTsai</title><meta name="description" content="金陵游记 - John Tsai"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="short icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="JohnTsai"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/caicaicaibucai" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/johntsaiandroid" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><section class="container"><div class="post"><article class="post-block"><h1 class="post-title">金陵游记</h1><div class="post-info">Dec 13, 2015</div><div class="post-content"><h1 id="u4E0D_u662F_u524D_u8A00_u7684_u524D_u8A00"><a href="#u4E0D_u662F_u524D_u8A00_u7684_u524D_u8A00" class="headerlink" title="不是前言的前言"></a>不是前言的前言</h1><p>去过很多城市，有呆了四年的无锡，有实习两个月的上海，有匆匆逗留的杭州，常州，武汉，长沙，有毕业开始工作的南京。但唯独南京给我一种莫名的亲切感。喜欢南京满城的梧桐树，紫金山的郁郁葱葱，新街口的都市繁华，喜欢珠江路充满浓浓爱意的糖果车站，喜欢那种诉说千年兴亡的历史感。也许真会因为一个人爱上一座城。</p>
+<h1 id="u96BE_u5F97_u7684_u5357_u4EAC_u84DD"><a href="#u96BE_u5F97_u7684_u5357_u4EAC_u84DD" class="headerlink" title="难得的南京蓝"></a>难得的南京蓝</h1><p>周六，没有预报的小雨。天公作美，难得的大晴天，天蓝得如同海一般。呼吸着空气都让人开心。</p>
+<p><img src="http://ww2.sinaimg.cn/large/8942f980gw1eyybqhvobqj20qo0zkgpa.jpg" alt=""></p>
+<a id="more"></a> 
+<p><img src="http://ww4.sinaimg.cn/large/8942f980gw1eyycgsix1pj20zk0qo422.jpg" alt=""></p>
+<h1 id="u76EE_u9001_u771F_u662F_u8F6E_u56DE_u554A"><a href="#u76EE_u9001_u771F_u662F_u8F6E_u56DE_u554A" class="headerlink" title="目送真是轮回啊"></a>目送真是轮回啊</h1><p>带着爸妈爬紫金山，到中山陵和明孝陵游玩。他们辛苦了这么多年，难得抽出时间放松自己，做儿子的心里真是五味杂陈。教爸妈买票坐地铁，小时候他们教我坐公交。给爸妈讲解中山陵和明孝陵的种种历史典故，小时候他们教我各种唐诗数学。</p>
+<p>晚上吃饭时，一抬头，看见他们脸上的皱纹，头上开始多了起来的白发。心头一震：“爸妈真的老了”。时间无言，只有我们这些匆匆过客才觉得它快。愿父母健健康康，快快乐乐。</p>
+<blockquote>
+<p>我慢慢地、慢慢地了解到，所谓父女母子一场，只不过意味着，你和他的缘分就是今生今世不断地在目送他的背影渐行渐远。你站立在小路的这一端，看着他逐渐消失在小路转弯的地方，而且，他用背影默默告诉你：不必追。 —《目送》</p>
+</blockquote>
+<h1 id="u662F_u975E_u6210_u8D25_u8F6C_u5934_u7A7A"><a href="#u662F_u975E_u6210_u8D25_u8F6C_u5934_u7A7A" class="headerlink" title="是非成败转头空"></a>是非成败转头空</h1><p>南京是个悲伤的城市，虽有着虎踞龙盘的帝王之气，而以她为都城的王朝个个短命。秦淮河边的商贾繁华，让人想起“商女不知亡国恨，隔江犹唱后庭花”的亡国之音呐。</p>
+<p><img src="http://ww1.sinaimg.cn/large/8942f980gw1eyyc33cqu6j20qo0zkjwt.jpg" alt=""></p>
+<p>南京又是一个有故事，有爱的城市。大街小巷，钟山长江纷纷在诉说那千年王朝兴替，爱恨情仇的故事。宋美龄喜欢梧桐树，蒋便为她在南京的街道边种满了梧桐。地铁1号线的珠江站，小朋友有没有因为收到叔叔阿姨的糖果而不哭了呢？</p>
+<p><img src="http://ww3.sinaimg.cn/large/8942f980gw1eyyc3c9q98j20qo0zk7bx.jpg" alt=""></p>
+<h1 id="u5C0F_u5C0F_u7684_u603B_u7ED3"><a href="#u5C0F_u5C0F_u7684_u603B_u7ED3" class="headerlink" title="小小的总结"></a>小小的总结</h1><p>一座城市会给人的亲切感和归属感，一个人也会给人一种熟悉感。呆在这样的城市很开心，能和我爱的人在一起也让人无比幸福。</p>
+<p>晚安，南京。晚安，爸妈。晚安，你们。晚安，你。</p>
+<embed src="http://www.xiami.com/widget/0_1772840827/singlePlayer.swf" type="application/x-shockwave-flash" width="257" height="33" wmode="transparent"></div></article></div></section><footer><div class="paginator"><a href="/2015/12/15/Android抓包设置Charles代理/" class="prev">上一篇</a></div><div class="copyright"><p>© 2015 - 2016 <a href="http://yoursite.com">John Tsai</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML"></script></body></html>

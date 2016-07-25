@@ -1,20 +1,19 @@
-extends partial/layout
-
-block site_title
-    != page.title + " · " + config.title
-
-block description
-    - var desc = page.desc || page.title + ' - ' + config.author;
-    meta(name="description", content=desc)
-
-block container
-    include mixins/post
-    +post(page)
-
-block pagination
-    include mixins/paginator
-    +post()
-    include partial/comment
-
-block copyright
-    include partial/copyright
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 为Android设备设置Charles代理 · JohnTsai</title><meta name="description" content="为Android设备设置Charles代理 - John Tsai"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="short icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="JohnTsai"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/caicaicaibucai" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/johntsaiandroid" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><section class="container"><div class="post"><article class="post-block"><h1 class="post-title">为Android设备设置Charles代理</h1><div class="post-info">Dec 15, 2015</div><div class="post-content"><h1 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h1><p><a href="https://www.charlesproxy.com/" target="_blank" rel="external">Charles</a>是Mac平台上一款非常优秀的HTTP网络抓包工具。</p>
+<h1 id="Android_u6293_u5305_u8BBE_u7F6ECharles_u4EE3_u7406"><a href="#Android_u6293_u5305_u8BBE_u7F6ECharles_u4EE3_u7406" class="headerlink" title="Android抓包设置Charles代理"></a>Android抓包设置Charles代理</h1><h2 id="u4E3AGenymotion_u8BBE_u7F6E_u4EE3_u7406"><a href="#u4E3AGenymotion_u8BBE_u7F6E_u4EE3_u7406" class="headerlink" title="为Genymotion设置代理"></a>为Genymotion设置代理</h2><ul>
+<li>1依次打开genymotion的设置–&gt;WLAN</li>
+<li>2长按WirelessSSID，选择高级选项,将代理设置为手动</li>
+<li>3分别将代理服务器设为10.0.3.2（genymotion在本地网络环境下的IP），将端口号设置为8888</li>
+<li>4.保存即可</li>
+</ul>
+<a id="more"></a> 
+<p><img src="http://ww4.sinaimg.cn/mw690/8942f980gw1ez0anh8fqhj20hi0tdq5l.jpg" alt=""></p>
+<h2 id="u4E3AAndroid_u771F_u673A_u8BBE_u7F6E_u4EE3_u7406"><a href="#u4E3AAndroid_u771F_u673A_u8BBE_u7F6E_u4EE3_u7406" class="headerlink" title="为Android真机设置代理"></a>为Android真机设置代理</h2><p>Mac查看本机IP地址：</p>
+<ul>
+<li>在终端中输入<code>ifconfig</code></li>
+<li>系统偏好设置-&gt;网络-&gt;高级-&gt;TCP/IP</li>
+</ul>
+<p>具体步骤和Genymotion的类似，只是将代理服务器地址设为本机IP地址。</p>
+<blockquote>
+<p>注意当真机请求时，Charles软件会弹出对话框，选择allow即可。 </p>
+</blockquote>
+</div></article></div></section><footer><div class="paginator"><a href="/2016/05/23/Android开发艺术探索学习笔记——IPC机制（一）/" class="prev">上一篇</a><a href="/2015/12/13/金陵游记/" class="next">下一篇</a></div><div class="copyright"><p>© 2015 - 2016 <a href="http://yoursite.com">John Tsai</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML"></script></body></html>

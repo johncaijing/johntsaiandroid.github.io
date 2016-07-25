@@ -1,20 +1,22 @@
-extends partial/layout
-
-block site_title
-    != page.title + " · " + config.title
-
-block description
-    - var desc = page.desc || page.title + ' - ' + config.author;
-    meta(name="description", content=desc)
-
-block container
-    include mixins/post
-    +post(page)
-
-block pagination
-    include mixins/paginator
-    +post()
-    include partial/comment
-
-block copyright
-    include partial/copyright
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Android:如何从堆栈中还原ProGuard混淆后的代码 · JohnTsai</title><meta name="description" content="Android:如何从堆栈中还原ProGuard混淆后的代码 - John Tsai"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="short icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="JohnTsai"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/caicaicaibucai" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/johntsaiandroid" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><section class="container"><div class="post"><article class="post-block"><h1 class="post-title">Android:如何从堆栈中还原ProGuard混淆后的代码</h1><div class="post-info">Jul 19, 2016</div><div class="post-content"><p>本文翻译自<a href="http://simplyadvanced.net/blog/android-how-to-decode-proguards-obfuscated-code-from-stack-trace/" target="_blank" rel="external">Android: How To Decode ProGuard’s Obfuscated Code From Stack Trace</a></p>
+<p>本篇文章是写给那些在他们的应用中使用<a href="http://developer.android.com/tools/help/proguard.html" target="_blank" rel="external">ProGuard</a>并且需要从堆栈信息中进行调试的Android开发者。这是一种非常简单就将混淆的错误信息转化为可读的方法。</p>
+<h3 id="u8FD8_u539F_u524D"><a href="#u8FD8_u539F_u524D" class="headerlink" title="还原前"></a>还原前</h3><p>以下是ProGuard混淆过的堆栈信息:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Caused by: java<span class="class">.lang</span><span class="class">.NullPointerException</span></span><br><span class="line">at net<span class="class">.simplyadvanced</span><span class="class">.ltediscovery</span><span class="class">.be</span><span class="class">.u</span>(Unknown Source)</span><br><span class="line">at net<span class="class">.simplyadvanced</span><span class="class">.ltediscovery</span><span class="class">.at</span><span class="class">.v</span>(Unknown Source)</span><br><span class="line">at net<span class="class">.simplyadvanced</span><span class="class">.ltediscovery</span><span class="class">.at</span><span class="class">.d</span>(Unknown Source)</span><br><span class="line">at net<span class="class">.simplyadvanced</span><span class="class">.ltediscovery</span><span class="class">.av</span><span class="class">.onReceive</span>(Unknown Source)</span><br></pre></td></tr></table></figure>
+<a id="more"></a> 
+<h3 id="u8FD8_u539F_u540E"><a href="#u8FD8_u539F_u540E" class="headerlink" title="还原后"></a>还原后</h3><p>只要在命令行写一行命令，混淆都将会被移除，如下所示：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Caused by: java<span class="class">.lang</span><span class="class">.NullPointerException</span></span><br><span class="line">at net<span class="class">.simplyadvanced</span><span class="class">.ltediscovery</span><span class="class">.UtilTelephony</span><span class="class">.boolean</span> <span class="function"><span class="title">is800MhzNetwork</span><span class="params">()</span><span class="params">(Unknown Source)</span></span></span><br><span class="line">at net<span class="class">.simplyadvanced</span><span class="class">.ltediscovery</span><span class="class">.ServiceDetectLte</span><span class="class">.void</span> <span class="function"><span class="title">checkAndAlertUserIf800MhzConnected</span><span class="params">()</span><span class="params">(Unknown Source)</span></span></span><br><span class="line">at net<span class="class">.simplyadvanced</span><span class="class">.ltediscovery</span><span class="class">.ServiceDetectLte</span><span class="class">.void</span> <span class="function"><span class="title">startLocalBroadcastReceiver</span><span class="params">()</span><span class="params">(Unknown Source)</span></span></span><br><span class="line">at net<span class="class">.simplyadvanced</span><span class="class">.ltediscovery</span><span class="class">.ServiceDetectLte</span>$<span class="number">2</span><span class="class">.void</span> <span class="function"><span class="title">onReceive</span><span class="params">(android.content.Context,android.content.Intent)</span><span class="params">(Unknown Source)</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="u5982_u4F55_u8FD8_u539F_u5806_u6808_u4FE1_u606F"><a href="#u5982_u4F55_u8FD8_u539F_u5806_u6808_u4FE1_u606F" class="headerlink" title="如何还原堆栈信息"></a>如何还原堆栈信息</h3><p>可以选择命令行或者GUI</p>
+<h4 id="GUI"><a href="#GUI" class="headerlink" title="GUI"></a>GUI</h4><ul>
+<li>1.打开<code>/tools/proguard/bin/proguardgui.bat</code></li>
+<li>2.选择左边栏的<code>ReTrace</code>选项</li>
+<li>3.添加你的mapping文件和混淆过的堆栈信息</li>
+<li>4.点击<code>ReTrace!</code></li>
+</ul>
+<p>如下图所示(译者注)<br><img src="http://7xr1jz.com1.z0.glb.clouddn.com/androidQQ20160719-0.png" alt=""></p>
+<h4 id="u547D_u4EE4_u884C"><a href="#u547D_u4EE4_u884C" class="headerlink" title="命令行"></a>命令行</h4><ul>
+<li>1.需要你的ProGuard的mapping文件和你想要还原的堆栈信息（如stacktrace.txt）</li>
+<li>2.最简单的方法就是将这些文件拷贝到<code>/tools/proguard/bin/</code>目录</li>
+<li>3.运行以下命令</li>
+</ul>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Windows</span></span><br><span class="line">retrace<span class="class">.bat</span> -verbose mapping<span class="class">.txt</span> stacktrace<span class="class">.txt</span> &gt; out<span class="class">.txt</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//Mac/Linux</span></span><br><span class="line">retrace<span class="class">.sh</span> -verbose mapping<span class="class">.txt</span> stacktrace<span class="class">.txt</span> &gt; out.txt</span><br></pre></td></tr></table></figure>
+</div></article></div></section><footer><div class="paginator"><a href="/2016/07/21/Android问题小结/" class="prev">上一篇</a><a href="/2016/06/22/深入浅出经典面试题之——反转字符串/" class="next">下一篇</a></div><div class="copyright"><p>© 2015 - 2016 <a href="http://yoursite.com">John Tsai</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML"></script></body></html>

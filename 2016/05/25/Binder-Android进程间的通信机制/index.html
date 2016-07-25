@@ -1,20 +1,46 @@
-extends partial/layout
-
-block site_title
-    != page.title + " · " + config.title
-
-block description
-    - var desc = page.desc || page.title + ' - ' + config.author;
-    meta(name="description", content=desc)
-
-block container
-    include mixins/post
-    +post(page)
-
-block pagination
-    include mixins/paginator
-    +post()
-    include partial/comment
-
-block copyright
-    include partial/copyright
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Binder:Android进程间的通信机制 · JohnTsai</title><meta name="description" content="Binder:Android进程间的通信机制 - John Tsai"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="short icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="JohnTsai"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/caicaicaibucai" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/johntsaiandroid" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><section class="container"><div class="post"><article class="post-block"><h1 class="post-title">Binder:Android进程间的通信机制</h1><div class="post-info">May 25, 2016</div><div class="post-content"><p><img src="/image/android-logo.png" alt=""></p>
+<p>在我们之前的文章<a href="/image/android-at-a-glance/">Android一瞥</a>中，我们介绍了Android的发展历程，解释了它的软件架构以及在Android平台开发应用需要注意什么。在本篇文章中，我将深入讨论<strong>Binder</strong>,复杂并且巨大的Android平台中的核心子系统。我将解释Binder中提供的不同组件,应用进程如何与系统进程通信，以及数据是如何被分享的。</p>
+<p>由于智能手机的硬件性能的提升，被称为手中的PC，智能手机开始取代PC。伴随这种趋势，移动操作系统也开始支持多任务和使用多核CPU处理各种多媒体任务。大多数移动操作系统都是基于PC操作系统的。保留了现有PC操作系统的架构，内核稍作了修改以满足移动环境的要求，并添加一些优化的功能。Windows Phone基于微软Windows系统，iOS基于Mac的OS X，Google的Android系统基于Linux内核，三者都是最受欢迎的移动操作系统。<br><a id="more"></a> </p>
+<h4 id="u667A_u80FD_u624B_u673A-_u624B_u4E2D_u7684_u7535_u8111_uFF0C_u624B_u4E2D_u7684PC_u64CD_u4F5C_u7CFB_u7EDF"><a href="#u667A_u80FD_u624B_u673A-_u624B_u4E2D_u7684_u7535_u8111_uFF0C_u624B_u4E2D_u7684PC_u64CD_u4F5C_u7CFB_u7EDF" class="headerlink" title="智能手机-手中的电脑，手中的PC操作系统"></a>智能手机-手中的电脑，手中的PC操作系统</h4><p>如果你有类似这样的疑问，</p>
+<blockquote>
+<p>如果PC的操作系统被植入到智能手机中，什么将会被修改，怎样以及为什么修改？</p>
+</blockquote>
+<p>开源的Android平台能提供给你非常完美的答案。Android平台包含了最新的软件技术，它通过他的开发者社区提供了大量的信息并且允许用户直接修改它的开源代码。</p>
+<p>Android继承了Linux内核非常强大的底层系统，如内存管理，多任务以及文件管理。另外，它还降低了开发门槛，通过提供适用于基于Dalvik虚拟机的Java应用的各种各样的开发工具。虽然底层系统是用C++语言实现的，它们是非常高效的代码。实际上，Android开发者说Android系统的一个优点就是相比于其他系统，他们使用的是C++实现的。</p>
+<p>因此，Android是一个包括多种技术的系统，如Linux内核，C++，Java，Dalvik虚拟机等。</p>
+<p><img src="/image/typical-schematic-of-android_structure.png" alt=""></p>
+<h4 id="u4E0D_u7BA1_u600E_u6837_uFF0C_u5B83_u90FD_u662FLinux_u8FDB_u7A0B"><a href="#u4E0D_u7BA1_u600E_u6837_uFF0C_u5B83_u90FD_u662FLinux_u8FDB_u7A0B" class="headerlink" title="不管怎样，它都是Linux进程"></a>不管怎样，它都是Linux进程</h4><p>Android提供了进程单元组件模型。换句话说，为应用提供相机功能的系统服务，负责屏幕显示的系统服务，所有这样的Android组件最终都是以Linux进程形式展示的。</p>
+<p><img src="/image/process_management_of_linux-kernel.png" alt=""></p>
+<p>因为Android运行在基于Linux内存，进程姐文件管理之上，系统服务也会因保护被Linux进程隔离开来。系统进程是使用Java代码和C++ Native代码编写的，所以服务运行在Dalvik虚拟机上，例如WiFi，定位和Activity服务等。</p>
+<p>为了支持移动设备例如智能手机，Android系统所有默认的系统功能都被以服务进程(server process)的类型提供。换句话说，为了使用例如<code>SurfaceFlinger</code>或<code>AudioFlinger</code>这样的功能，作为一个运行在用户模式下的独立进程的请求应该被发出。</p>
+<p><img src="/image/android_system_services_and_applications_run_by_linux_process.png" alt=""></p>
+<p>例如，当我开发的应用调用Android SDK的API来获得位置信息时，应用发送请求给提供位置服务的内部Linux进程，然后获得回复。同样地，当相机被使用时，与相机服务进行交互。</p>
+<p><img src="/image/application_process_with_call_locations_service_and_camera_service.png" alt=""></p>
+<p>由于所有系统服务都被作为服务进程(server process),一种进程间发送和回复请求的机制是必要的。在Android中，被称为Binder机制。Android通过Binder使用其他进程提供的方法。</p>
+<p><img src="/image/binder_android_communication_infrastructure_between_processes.png" alt=""></p>
+<p>然后，<em>为什么开发一种新的机制，而不使用Linux提供的跨进程通信机制(IPC)，例如Sockets和Pipes?</em> 这主要是因为性能，正如我们之前讨论的，Android的所有系统功能都被以服务进程的形式提供，所以一个最优的跨进程通信方法是必要的，而Binder因此而诞生。Binder引用被所有进程共享的内核内存来降低由于内存拷贝造成的开销。另外，它提供了用C++编写的远端程序调用(RPC)框架。</p>
+<p>系统方法都被以服务进程的形式提供，请求和回复都通过Binder机制。你会问，</p>
+<blockquote>
+<p>Android系统架构会因此有什么好处?</p>
+</blockquote>
+<ul>
+<li><strong>易于拓展和移除功能</strong> 增加新的系统服务或移除现有的功能变得很容易。</li>
+<li><strong>易于测试</strong> 测试被限制在组件单元级别，所以不可能测试整个服务，因此有着更严格的测试。</li>
+<li><strong>易于通信(port)</strong> 与新的处理器通信需要一些改变，提供了通信所需要的工具。</li>
+<li><strong>支持分布式系统</strong> 进程间通信是基于Binder的，因此它保证了组件间位置的透明。</li>
+</ul>
+<p>这些好处和微核架构的操作系统的优点很相似。</p>
+<p>让我们进一步讨论Binder。</p>
+<h4 id="u7ED1_u5B9A_u6240_u6709_u529F_u80FD_u7684Binder"><a href="#u7ED1_u5B9A_u6240_u6709_u529F_u80FD_u7684Binder" class="headerlink" title="绑定所有功能的Binder"></a>绑定所有功能的Binder</h4><p>Binder机制源于一个简单的想法。<strong>“<em>让（进程间的）请求和回复被写进所有进程都能共享(share)到的区域，让每个进程都指向内存地址。</em>”</strong>因此内核区域正好满足这些要求。</p>
+<p><img src="/image/kernel_space_shared_by_all_processes_1.png" alt=""></p>
+<p>Binder驱动用来使用内核区域，它的作用是转换内存地址，每个进程将内核区域的内存地址映射到引用。</p>
+<p><img src="/image/binder_driver_configuration.png" alt=""></p>
+<p>Binder驱动能被<code>ioctl()</code>系统方法使用，ioctl方法是标准的Linux方法。这种机制被称为Binder IPC。</p>
+<p><img src="/image/transfer_structure_of_user_data_between_processes_through_binder_driver.png" alt=""></p>
+<p>这里有一种C++框架，处理使用Binder IPC传输的数据，发起远端程序调用(RPC)。通常用于创建系统服务。然后，一个进程能使用其他进程的方法就像它自己的一样。</p>
+<p><img src="/image/c++framefork_that_transltes_data_translated_to_rpc_through_binder_driver.png" alt=""></p>
+<h4 id="u7ED3_u8BBA"><a href="#u7ED3_u8BBA" class="headerlink" title="结论"></a>结论</h4><p>在这边简短的文章中，我尝试在Android大量的技术背后介绍一些简单的知识。我希望对你理解Android系统有所帮助。</p>
+<p>总之，Binder是Android系统的基础。我们主要学习了Binder的三个组件:<em>驱动(Driver)</em>、<em>IPC</em>和<em>RPC</em>。</p>
+<hr>
+<p>本文翻译自<a href="http://www.cubrid.org/blog/dev-platform/binder-communication-mechanism-of-android-processes/" target="_blank" rel="external">Binder: Communication Mechanism of Android Processes</a>,版权归原作者所有，译文版权归本人所有。</p>
+</div></article></div></section><footer><div class="paginator"><a href="/2016/06/22/深入浅出经典面试题之——反转字符串/" class="prev">上一篇</a><a href="/2016/05/23/Android开发艺术探索学习笔记——IPC机制（一）/" class="next">下一篇</a></div><div class="copyright"><p>© 2015 - 2016 <a href="http://yoursite.com">John Tsai</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML"></script></body></html>
