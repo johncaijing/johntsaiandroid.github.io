@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-07-25T03:01:52.000Z</updated>
+  <updated>2016-07-26T01:45:01.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,73 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>理解RxJava:(三)RxJava的优点</title>
+    <link href="http://yoursite.com/2016/07/26/%E7%90%86%E8%A7%A3RxJava(%E4%B8%89)RxJava%E7%9A%84%E4%BC%98%E7%82%B9/"/>
+    <id>http://yoursite.com/2016/07/26/理解RxJava(三)RxJava的优点/</id>
+    <published>2016-07-26T04:14:00.000Z</published>
+    <updated>2016-07-26T01:45:01.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>在第一部分，讲解了RxJava的基本结构。在第二部分，展示了operators的强大之处。但是你们可能仍然没有被说服，也没有足够的理由信服。下面是一些能让你信服的RxJava框架的优点。</p>
+<h2 id="u9519_u8BEF_u5904_u7406"><a href="#u9519_u8BEF_u5904_u7406" class="headerlink" title="错误处理"></a>错误处理</h2><p>截至当前，我们一直都忽略<code>onComplete()</code>和<code>onError()</code>方法。它们标志着<code>Observable</code>停止发出items以及原因（不管是成功地完成或是不可恢复的错误）。</p>
+<p>我们最初的<code>Subscriber</code>有能力监听<code>onComplete()</code>和<code>onError()</code>事件。动手实现如下所示：</p>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Observable.just(<span class="string">"Hello, world!"</span>)</span><br><span class="line">    .<span class="built_in">map</span>(s -&gt; potentialException(s))</span><br><span class="line">    .<span class="built_in">map</span>(s -&gt; anotherPotentialException(s))</span><br><span class="line">    .subscribe(<span class="keyword">new</span> Subscriber&lt;<span class="keyword">String</span>&gt;() &#123;</span><br><span class="line">        @Override</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> onNext(<span class="keyword">String</span> s) &#123; System.out.<span class="built_in">println</span>(s); &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> onCompleted() &#123; System.out.<span class="built_in">println</span>(<span class="string">"Completed!"</span>); &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> onError(Throwable e) &#123; System.out.<span class="built_in">println</span>(<span class="string">"Ouch!"</span>); &#125;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+<p>假设<code>potentialException()</code>和<code>anotherPotentialException()</code>都能抛出异常。每个<code>Observable</code>都以调用<code>onCompleted()``onError()</code>方法结束。正因为这样， 程序的输出要么是<code>Completed!</code>，要么是<code>Ouch!</code>(因为异常的抛出)<br><a id="more"></a><br>关于这个的补充：</p>
+<ul>
+<li><p>1.<strong><code>onError()</code>方法在有异常在任意时候被抛出的时候被调用。</strong></p>
+<blockquote>
+<p>这使得错误处理变得更简单。只需要在最后的时候在一个简单的方法中处理所有的错误即可。</p>
+</blockquote>
+</li>
+<li><p>2.<strong>operators不需要处理异常</strong>。</p>
+<blockquote>
+<p>在<code>Observable</code>链上抛出的任何异常都可以留给    <code>Subscriber</code>决定如何处理。因为<code>onError()</code>方法之前的异常都会被跳过。    </p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><p>3.我们能知道<code>Subscriber</code>完成接收items的时候。</p>
+<blockquote>
+<p>知道任务什么时候结束有助于代码的流动。</p>
+</blockquote>
+<p>在错误处理上， 这个模式要比传统的错误处理简单得多。使用回调，必须在每个回调中处理错误。不仅仅是造成重复代码，也意味着每个回调都需要知道如何处理错误，意味着你的回调代码和调用者高度耦合。</p>
+<p>通过RxJava，<code>Observable</code>不需要知道如何处理错误。operators不仅仅不需要处理错误状态，在关键错误发生时，它们会自动跳过。我们可以把所有的错误处理交给<code>Subscriber</code>。</p>
+</li>
+</ul>
+<h2 id="u8C03_u5EA6_u8005_uFF08Schedulers_uFF09"><a href="#u8C03_u5EA6_u8005_uFF08Schedulers_uFF09" class="headerlink" title="调度者（Schedulers）"></a>调度者（Schedulers）</h2><p>你有一个需要做网络请求的Android应用。因为可能需要耗费很长时间，于是你在其它线程做网络请求。一般都会遇到这样的问题。</p>
+<p>Android应用的多线程操作很难是因为你必须在正确的线程运行对的代码。否则应用会闪退。经典的错误就是当你在非主线程修改View的状态。</p>
+<p>在RxJava中，我们能通过<code>subscribeOn()</code>方法指定<code>Observer</code>代码运行的线程，以及<code>observeOn()</code>方法指定<code>Subscriber</code>运行的线程。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">myObservableServices</span><span class="class">.retrieveImage</span>(<span class="tag">url</span>)</span><br><span class="line">    <span class="class">.subscribeOn</span>(<span class="tag">Schedulers</span><span class="class">.io</span>())</span><br><span class="line">    <span class="class">.observeOn</span>(<span class="tag">AndroidSchedulers</span><span class="class">.mainThread</span>())</span><br><span class="line">    <span class="class">.subscribe</span>(<span class="tag">bitmap</span> <span class="tag">-</span>&gt; <span class="tag">myImageView</span><span class="class">.setImageBitmap</span>(<span class="tag">bitmap</span>));</span><br></pre></td></tr></table></figure>
+<p>多么简单？我的<code>Subscriber</code>之前的都运行在I/O线程。最后，View的操作发生在主线程。</p>
+<p>最厉害的部分是我能绑定<code>subcribeOn()</code>和<code>observeOn()</code>方法到任意的<code>Observable</code>上。<br>它们仅仅是operators。我不需要担心<code>Observable</code>和之前的operators在做什么。在最后仅仅操作这个就轻易的实现线程的切换。</p>
+<h2 id="u8BA2_u9605_uFF08Subscriptions_uFF09"><a href="#u8BA2_u9605_uFF08Subscriptions_uFF09" class="headerlink" title="订阅（Subscriptions）"></a>订阅（Subscriptions）</h2><p>还有些东西没有讲解。当你调用<code>Observable.subscribe()</code>，返回的是<code>Subscription</code>。这代表着你的<code>Observable</code>和<code>Subscriber</code>之间的联系：</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Subscription </span><span class="keyword">subscription </span>= Observable.just(<span class="string">"Hello, World!"</span>)</span><br><span class="line">    .<span class="keyword">subscribe(s </span>-&gt; System.out.println(s))<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>可以使用<code>Subscription</code>来断绝这个联系：</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">subscription.unsubscribe();</span><br><span class="line"></span><span class="label">System.out.println</span>(<span class="string">"Unsubscribed="</span> + <span class="keyword">subscription.isUnsubscribed());</span><br><span class="line"></span>// 输出 <span class="string">"Unsubscribed=true"</span></span><br></pre></td></tr></table></figure>
+<p>RxJava取消订阅的优点是它能停止方法链。如果你有一个复杂的operators链，调用<code>unsubscribe</code>方法将终止当前正在运行的代码。无需额外的操作。</p>
+<h2 id="u7ED3_u8BBA"><a href="#u7ED3_u8BBA" class="headerlink" title="结论"></a>结论</h2><p>记住这几篇都是RxJava的入门文章。你们要学的比我现在所讲的要多得多。例如，研读<a href="https://github.com/ReactiveX/RxJava/wiki/Backpressure" target="_blank" rel="external">backpressure</a>。我不会在所有地方都用响应式编程。而只会在我想要把复杂逻辑变得更简单的地方使用。</p>
+<p>最初，我计划这篇文章是这系列的最后一篇。但是一个常见的需求是RxJava在Android中的实际运用。因此，你能继续阅读第四部分。我希望这个入门系列能引导你们开始学习使用这个有趣的框架。如果你想要进一步学习，我建议阅读<a href="https://github.com/ReactiveX/RxJava/wiki" target="_blank" rel="external">RxJava的官方wiki</a>。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在第一部分，讲解了RxJava的基本结构。在第二部分，展示了operators的强大之处。但是你们可能仍然没有被说服，也没有足够的理由信服。下面是一些能让你信服的RxJava框架的优点。&lt;/p&gt;
+&lt;h2 id=&quot;u9519_u8BEF_u5904_u7406&quot;&gt;&lt;a href=&quot;#u9519_u8BEF_u5904_u7406&quot; class=&quot;headerlink&quot; title=&quot;错误处理&quot;&gt;&lt;/a&gt;错误处理&lt;/h2&gt;&lt;p&gt;截至当前，我们一直都忽略&lt;code&gt;onComplete()&lt;/code&gt;和&lt;code&gt;onError()&lt;/code&gt;方法。它们标志着&lt;code&gt;Observable&lt;/code&gt;停止发出items以及原因（不管是成功地完成或是不可恢复的错误）。&lt;/p&gt;
+&lt;p&gt;我们最初的&lt;code&gt;Subscriber&lt;/code&gt;有能力监听&lt;code&gt;onComplete()&lt;/code&gt;和&lt;code&gt;onError()&lt;/code&gt;事件。动手实现如下所示：&lt;/p&gt;
+&lt;figure class=&quot;highlight processing&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Observable.just(&lt;span class=&quot;string&quot;&gt;&quot;Hello, world!&quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    .&lt;span class=&quot;built_in&quot;&gt;map&lt;/span&gt;(s -&amp;gt; potentialException(s))&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    .&lt;span class=&quot;built_in&quot;&gt;map&lt;/span&gt;(s -&amp;gt; anotherPotentialException(s))&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    .subscribe(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Subscriber&amp;lt;&lt;span class=&quot;keyword&quot;&gt;String&lt;/span&gt;&amp;gt;() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        @Override&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; onNext(&lt;span class=&quot;keyword&quot;&gt;String&lt;/span&gt; s) &amp;#123; System.out.&lt;span class=&quot;built_in&quot;&gt;println&lt;/span&gt;(s); &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        @Override&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; onCompleted() &amp;#123; System.out.&lt;span class=&quot;built_in&quot;&gt;println&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&quot;Completed!&quot;&lt;/span&gt;); &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        @Override&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; onError(Throwable e) &amp;#123; System.out.&lt;span class=&quot;built_in&quot;&gt;println&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&quot;Ouch!&quot;&lt;/span&gt;); &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;假设&lt;code&gt;potentialException()&lt;/code&gt;和&lt;code&gt;anotherPotentialException()&lt;/code&gt;都能抛出异常。每个&lt;code&gt;Observable&lt;/code&gt;都以调用&lt;code&gt;onCompleted()``onError()&lt;/code&gt;方法结束。正因为这样， 程序的输出要么是&lt;code&gt;Completed!&lt;/code&gt;，要么是&lt;code&gt;Ouch!&lt;/code&gt;(因为异常的抛出)&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="http://yoursite.com/tags/Android/"/>
+    
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
+    
+      <category term="RxJava" scheme="http://yoursite.com/tags/RxJava/"/>
+    
+  </entry>
   
   <entry>
     <title>理解RxJava:(二)Operator，Operator</title>

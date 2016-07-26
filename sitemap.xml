@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2016/07/26/%E7%90%86%E8%A7%A3RxJava(%E4%B8%89)RxJava%E7%9A%84%E4%BC%98%E7%82%B9/</loc>
+    
+    <lastmod>2016-07-26T01:45:01.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2016/07/23/%E7%90%86%E8%A7%A3RxJava(%E4%BA%8C)Operator%EF%BC%8COperator/</loc>
     
     <lastmod>2016-07-25T03:01:52.000Z</lastmod>
