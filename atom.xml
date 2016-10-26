@@ -314,7 +314,7 @@
     <link href="http://yoursite.com/2016/07/21/Android%E9%97%AE%E9%A2%98%E5%B0%8F%E7%BB%93/"/>
     <id>http://yoursite.com/2016/07/21/Android问题小结/</id>
     <published>2016-07-21T11:56:11.000Z</published>
-    <updated>2016-10-20T02:50:44.000Z</updated>
+    <updated>2016-10-26T09:11:46.000Z</updated>
     
     <content type="html"><![CDATA[<h4 id="1-Gradle_u7F16_u8BD1_u62A5_u9519_u5982_u4E0B_uFF1A"><a href="#1-Gradle_u7F16_u8BD1_u62A5_u9519_u5982_u4E0B_uFF1A" class="headerlink" title="1.Gradle编译报错如下："></a>1.Gradle编译报错如下：</h4><p><code>Failed to resolve: XXXX. Show in File, Show in Project Structure dialog</code></p>
 <p>重启Android Studio并清除Cache</p>
@@ -323,6 +323,7 @@
 <script src="https://gist.github.com/JohnTsaiAndroid/2e2239b5529518831db6576e7eac39d5.js"></script>
 
 <h4 id="3-Android_Studio_u67E5_u770B_u7C7B_u7684_u7EE7_u627F_u5173_u7CFB"><a href="#3-Android_Studio_u67E5_u770B_u7C7B_u7684_u7EE7_u627F_u5173_u7CFB" class="headerlink" title="3.Android Studio查看类的继承关系"></a>3.Android Studio查看类的继承关系</h4><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="constant">Windows</span><span class="symbol">:Crtl+H</span></span><br><span class="line"><span class="constant">Mac</span><span class="symbol">:Control+H</span></span><br></pre></td></tr></table></figure>
+<h4 id="4-Android_Studio_u67E5_u770B_u6240_u6709_u65AD_u70B9"><a href="#4-Android_Studio_u67E5_u770B_u6240_u6709_u65AD_u70B9" class="headerlink" title="4.Android Studio查看所有断点"></a>4.Android Studio查看所有断点</h4><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="constant">Windows</span><span class="symbol">:Shift+Control+F8</span></span><br><span class="line"><span class="constant">Mac</span><span class="symbol">:Shift+Command+F8</span></span><br></pre></td></tr></table></figure>
 ]]></content>
     
     <summary type="html">
