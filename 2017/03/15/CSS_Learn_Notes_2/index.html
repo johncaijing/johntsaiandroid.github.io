@@ -1,0 +1,80 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="No pain No gain"><title>CSS学习笔记（二）——样式 | JohnTsai</title><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/5.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">CSS学习笔记（二）——样式</h1><a id="logo" href="/.">JohnTsai</a><p class="description">万物之中，希望最美，最美之物，永不凋零.</p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首頁</i></a><a href="/archives/"><i class="fa fa-archive"> 所有文章</i></a><a href="/about/"><i class="fa fa-user"> 關於</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">CSS学习笔记（二）——样式</h1><div class="post-meta">Mar 15, 2017<script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span></div><div class="post-content"><h3 id="CSS__u80CC_u666F"><a href="#CSS__u80CC_u666F" class="headerlink" title="CSS 背景"></a>CSS 背景</h3><ul>
+<li>背景色</li>
+</ul>
+<p><code>background-color</code>为元素设置背景色</p>
+<p>如</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">p</span><span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">background-color</span>:<span class="value">gray</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>背景图像<br><code>background-image</code>,默认值为<code>none</code></li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">body</span><span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">background-image</span>:<span class="value"><span class="function">url</span>(https://ss0.bdstatic.com/<span class="number">5</span>aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png)</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>背景重复</li>
+</ul>
+<p><code>background-repeat</code>设置，可选的值有<code>repeat-x</code>,<code>repeat-y</code>, <code>repeat</code>,<code>no-repeat</code></p>
+<ul>
+<li>背景定位</li>
+</ul>
+<p><code>background-position</code>设置图像的位置。</p>
+<blockquote>
+<p>可选的值有<code>center</code>,<code>top</code>,<code>bottom</code>,<code>left</code>,<code>right</code>或者是长度值<code>5px</code>,<code>10cm</code>以及百分值<code>50%</code></p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">body</span><span class="rules">&#123;</span><br><span class="line">   <span class="rule"><span class="attribute">background-image</span>:<span class="value"><span class="function">url</span>(https://ss0.bdstatic.com/<span class="number">5</span>aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png)</span></span>;</span><br><span class="line">   <span class="rule"><span class="attribute">background-repeat</span>:<span class="value">no-repeat</span></span>;</span><br><span class="line">   <span class="rule"><span class="attribute">background-position</span>:<span class="value">right bottom</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>背景关联<br><code>background-attachment</code>设置背景图像是否随用户滚动而滚动。<code>fixed</code>不滚动,<code>scroll</code>是滚动。</li>
+</ul>
+<p><img src="https://cloud.githubusercontent.com/assets/8317477/23939580/53ead580-099c-11e7-98c0-10146edbe5a7.png" alt=""></p>
+<h3 id="CSS_u6587_u672C"><a href="#CSS_u6587_u672C" class="headerlink" title="CSS文本"></a>CSS文本</h3><p>文本属性可定义文本的外观（颜色，字符间距，装饰文本，缩进）</p>
+<ul>
+<li><p>缩进文本(<code>text-indent</code>)</p>
+<pre><code><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">p</span><span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">text-indent</span>:<span class="value"><span class="number">5em</span></span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+</code></pre></li>
+</ul>
+<ul>
+<li>水平对齐(<code>text-align</code>)</li>
+<li>字间隔(    <code>word-spacing</code>)</li>
+<li>字母间隔(<code>letter-spacing</code>)</li>
+<li>字符转换(<code>text-transform</code>)</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">h1</span><span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">text-transform</span>:<span class="value">uppercase</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>文本装饰(<code>text-decoration</code>)</li>
+</ul>
+<blockquote>
+<p>可选的值:<code>none</code>,<code>underline</code>,<code>overline</code>,<code>line-through</code>,<code>blink</code></p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.decoration</span><span class="rules">&#123;</span><br><span class="line">              <span class="rule"><span class="attribute">text-decoration</span>:<span class="value"> underline</span></span>;</span><br><span class="line">          &#125;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>处理空白符(<code>text-space</code>)</li>
+</ul>
+<p>影响对文档中的空格、换行和tab字符的处理。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">p</span><span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">white-space</span>:<span class="value">normal</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>文本方向(<code>direction</code>)</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">p</span><span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">direction</span>:<span class="value">rtl</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="CSS__u5B57_u4F53"><a href="#CSS__u5B57_u4F53" class="headerlink" title="CSS 字体"></a>CSS 字体</h3><p>定义文本的字体系列，大小，加粗，风格（如斜体）和变型（如小型大写字母）</p>
+<ul>
+<li>字体系列</li>
+</ul>
+<blockquote>
+<p>分为通用(如<code>Serif</code>)和特定系列(如<code>Times</code>)</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">body</span><span class="rules">&#123;</span><br><span class="line">   <span class="rule"><span class="attribute">font-family</span>:<span class="value">sans-serif</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>字体风格(<code>font-style</code>)</li>
+</ul>
+<blockquote>
+<p>三个值<code>normal</code>,<code>italic</code>,<code>oblique</code></p>
+</blockquote>
+<ul>
+<li>字体变形(<code>font-variant</code>)</li>
+<li><p>字体加粗(<code>font-weight</code>)</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">p</span><span class="class">.normal</span> <span class="rules">&#123;<span class="rule"><span class="attribute">font-weight</span>:<span class="value">normal</span></span>;&#125;</span></span><br><span class="line"><span class="tag">p</span><span class="class">.thick</span> <span class="rules">&#123;<span class="rule"><span class="attribute">font-weight</span>:<span class="value">bold</span></span>;&#125;</span></span><br><span class="line"><span class="tag">p</span><span class="class">.thicker</span> <span class="rules">&#123;<span class="rule"><span class="attribute">font-weight</span>:<span class="value"><span class="number">900</span></span></span>;&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>字体大小(<code>font-size</code>)</li>
+</ul>
+<p><img src="https://cloud.githubusercontent.com/assets/8317477/23980223/667c6108-0a39-11e7-9437-5351660b2f24.png" alt=""></p>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://johntsai.work/2017/03/15/CSS_Learn_Notes_2/" data-id="cj0btyjfe000ukf1nvawvlbo5" class="article-share-link">分享至</a><div class="tags"><a href="/tags/学习笔记/">学习笔记</a></div><div class="post-nav"><a href="/2017/03/15/CSS_Learn_Notes_1/" class="next">CSS学习笔记</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分類</i></div></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 標籤</i></div><div class="tagcloud"><a href="/tags/游记/" style="font-size: 15px;">游记</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/RxJava/" style="font-size: 15px;">RxJava</a> <a href="/tags/Android/" style="font-size: 15px;">Android</a> <a href="/tags/算法/" style="font-size: 15px;">算法</a> <a href="/tags/学习笔记/" style="font-size: 15px;">学习笔记</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/15/CSS_Learn_Notes_2/">CSS学习笔记（二）——样式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/15/CSS_Learn_Notes_1/">CSS学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/27/理解RxJava(四)Reactive Android/">理解RxJava:(四)Reactive Android</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/26/理解RxJava(三)RxJava的优点/">理解RxJava:(三)RxJava的优点</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/23/理解RxJava(二)Operator，Operator/">理解RxJava:(二)Operator，Operator</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/22/理解RxJava(一)基础知识/">理解RxJava:(一)基础知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/21/Android问题小结/">Android问题小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/Android如何从堆栈中还原ProGuard混淆后的代码/">Android:如何从堆栈中还原ProGuard混淆后的代码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/22/深入浅出经典面试题之——反转字符串/">深入浅出经典面试题之——反转字符串</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/25/Binder-Android进程间的通信机制/">Binder:Android进程间的通信机制</a></li></ul></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">© <a href="/." rel="nofollow">JohnTsai.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="/css/jquery.fancybox.css?v=0.0.0"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
