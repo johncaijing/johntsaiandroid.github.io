@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://johntsai.work/2016/07/21/Android%E9%97%AE%E9%A2%98%E5%B0%8F%E7%BB%93/</loc>
+    
+    <lastmod>2017-03-17T02:06:51.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://johntsai.work/2017/03/15/CSS_Learn_Notes_2/</loc>
     
     <lastmod>2017-03-16T06:25:15.000Z</lastmod>
@@ -19,13 +26,6 @@
     <loc>http://johntsai.work/2016/07/27/%E7%90%86%E8%A7%A3RxJava(%E5%9B%9B)Reactive%20Android/</loc>
     
     <lastmod>2017-03-01T08:17:28.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://johntsai.work/2016/07/21/Android%E9%97%AE%E9%A2%98%E5%B0%8F%E7%BB%93/</loc>
-    
-    <lastmod>2016-10-26T09:11:46.000Z</lastmod>
     
   </url>
   
@@ -103,13 +103,6 @@
     <loc>http://johntsai.work/googleab353d1541f1ba21.html</loc>
     
     <lastmod>2015-12-22T05:58:09.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://johntsai.work/2015/12/13/%E9%87%91%E9%99%B5%E6%B8%B8%E8%AE%B0/</loc>
-    
-    <lastmod>2015-12-18T01:56:02.000Z</lastmod>
     
   </url>
   
